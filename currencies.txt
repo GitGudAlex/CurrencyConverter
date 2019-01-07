@@ -1,56 +1,50 @@
-/Chinese yuan:9.304750
-/Euro:1.273760
-/Japanese yen:153.535000
-/U.K. pound:1.100550
-/U.S. dollar:1.349170
-/Algerian dinar:148.739000
-/Australian dollar:1.781550
-/Bahrain dinar:0.507287
-/Botswana pula:14.024600
-/Brazilian real:4.230710
-/Brunei dollar:1.904750
-/Canadian dollar:1.808420
-/Chilean peso:884.470000
-
-/Colombian peso:4,017.050000
-
-/Czech koruna:34.411800
-/Danish krone:9.468710
-/Hungarian forint:394.023000
-/Icelandic krona:144.023000
-/Indian rupee:90.064900
-
-/Indonesian rupiah:18.030.200000
-/Iranian rial:43.725.000000
-
-/Israeli New Shekel:4.963570
-/Kazakhstani tenge:426.687000
-
-/Korean won:1.555.180000
-
-/Kuwaiti dinar:0.412103
-/Libyan dinar:1.932400
-/Malaysian ringgit:6.006470
-/Mauritian rupee:47.953100
-/Mexican peso:26.381300
-/Nepalese rupee:144.226000
-/New Zealand dollar:1.920520
-/Norwegian krone:11.422200
-/Omani rial:0.518753
-/Pakistani rupee:141.465000
-/Peruvian sol:4.436070
-/Philippine peso:67.961600
-/Polish zloty:5.486130
-/Qatari riyal:4.910960
-/Russian ruble:78.706100
-/Saudi Arabian riyal:5.059370
-/Singapore dollar:1.904750
-/South African rand:17.545400
-/Sri Lankan rupee:204.061000
-/Swedish krona:12.119000
-/Swiss franc:1.362120
-/Thai baht:47.263900
-/Trinidadian dollar:9.098600
-/Tunisian dinar:3.117200
-/U.A.E. dirham:4.954810
-/Uruguayan peso:38.080200
+Chinese yuan:9.304750
+Euro:1.273760
+Japanese yen:153.535000
+U.K. pound:1.100550
+U.S. dollar:1.349170
+Algerian dinar:148.739000
+Australian dollar:1.781550
+Bahrain dinar:0.507287
+Botswana pula:14.024600
+Brazilian real:4.230710
+Brunei dollar:1.904750
+Canadian dollar:1.808420
+Chilean peso:884.470000
+Colombian peso:4,017.050000
+Czech koruna:34.411800
+Danish krone:9.468710
+Hungarian forint:394.023000
+Icelandic krona:144.023000
+Indian rupee:90.064900
+Indonesian rupiah:18.030.200000
+Iranian rial:43.725.000000
+Israeli New Shekel:4.963570
+Kazakhstani tenge:426.687000
+Korean won:1.555.180000
+Kuwaiti dinar:0.412103
+Libyan dinar:1.932400
+Malaysian ringgit:6.006470
+Mauritian rupee:47.953100
+Mexican peso:26.381300
+Nepalese rupee:144.226000
+New Zealand dollar:1.920520
+Norwegian krone:11.422200
+Omani rial:0.518753
+Pakistani rupee:141.465000
+Peruvian sol:4.436070
+Philippine peso:67.961600
+Polish zloty:5.486130
+Qatari riyal:4.910960
+Russian ruble:78.706100
+Saudi Arabian riyal:5.059370
+Singapore dollar:1.904750
+South African rand:17.545400
+Sri Lankan rupee:204.061000
+Swedish krona:12.119000
+Swiss franc:1.362120
+Thai baht:47.263900
+Trinidadian dollar:9.098600
+Tunisian dinar:3.117200
+U.A.E. dirham:4.954810
+Uruguayan peso:38.080200
