@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         String toBuy = "not set";
         String toSell = "not set";
         String top = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++";
+        String sternchen = "++++++++++++++++++++++++++++";
         String exitStart = "Please choose an option (>>x<< to exit)";
         String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
@@ -38,7 +38,7 @@ public class Main {
 
                 c = s.nextLine();
                 String a[] = c.split(":");
-                Currency neu = new Currency (a[0],a[1]);
+                Currency neu = new Currency(a[0], a[1]);
                 currencylist.add(b, neu);
                 //System.out.println(currencylist.get(b).getRate());
                 b++;
@@ -49,28 +49,27 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println(top+"\n"+auswahlStart+"\n\n\n"+exitStart);
+        System.out.println(top + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
         Scanner eingabe = new Scanner(System.in);
 
-        while (eingabe.hasNext()&& auswahlGesetzt==false) {
+        while (eingabe.hasNext() && auswahlGesetzt == false) {
             String e = eingabe.next();
 
             if (e.equals("0")) {
-                auswahlGesetzt = true;
 
-                System.out.println(top+"\n"+auswahlStart+"\n\n\n"+exitStart+"\n"+auswahl);
+                System.out.println(top + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
 
                 e = eingabe.next();
 
                 int j = 0;
                 String[] vorschlag = new String[50];
-                for(int i = 0; i<50; i++){
+                for (int i = 0; i < 50; i++) {
 
                     String a = currencylist.get(i).getName();
 
                     if (a.contains(e)) {
-                        vorschlag [j] = a;
+                        vorschlag[j] = a;
                         System.out.println(j + ": " + vorschlag[j]);
                         j++;
 
@@ -80,34 +79,32 @@ public class Main {
                 System.out.println("\n" + select);
                 e = eingabe.next();
 
-                for(int i = 0; i<vorschlag.length; i++)
+                for (int i = 0; i < vorschlag.length; i++)
 
-                    if(e.equals(""+i)){
+                    if (e.equals("" + i)) {
                         toBuy = vorschlag[i];
 
                         System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
 
                     }
 
-                System.out.println(auswahlStart+"\n\n"+exitStart);
-                    auswahlGesetzt = false;
+                System.out.println(auswahlStart + "\n\n" + exitStart);
 
 
             } else if (e.equals("1")) {
-                auswahlGesetzt = true;
 
-                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++"+"\n"+auswahlStart+"\n\n\n"+exitStart+"\n"+auswahl);
+                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++" + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
 
                 e = eingabe.next();
 
                 int j = 0;
                 String[] vorschlag = new String[50];
-                for(int i = 0; i<50; i++){
+                for (int i = 0; i < 50; i++) {
 
                     String a = currencylist.get(i).getName();
 
                     if (a.contains(e)) {
-                        vorschlag [j] = a;
+                        vorschlag[j] = a;
                         System.out.println(j + ": " + vorschlag[j]);
                         j++;
 
@@ -117,30 +114,48 @@ public class Main {
                 System.out.println("\n" + select);
                 e = eingabe.next();
 
-                for(int i = 0; i<vorschlag.length; i++)
+                for (int i = 0; i < vorschlag.length; i++)
 
-                    if(e.equals(""+i)){
+                    if (e.equals("" + i)) {
                         toSell = vorschlag[i];
 
                         System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
 
                     }
 
-                System.out.println(auswahlStart+"\n\n"+exitStart);
-                auswahlGesetzt = false;
-
-
-
+                System.out.println(auswahlStart + "\n\n" + exitStart);
 
             } else if (e.equals("2")) {
-                auswahlGesetzt = true;
 
                 System.out.println(auswahl2);
 
                 double wert = eingabe.nextDouble();
 
+                int j = 0;
+                int m = 0;
+                String f = "",h = "";
+                String[] vorschlag = new String[50];
+                for (int i = 0; i < 50; i++) {
+
+                    String a = currencylist.get(i).getName();
+
+                    if (a.contains(toBuy)) {
+                        vorschlag[j] = a;
+                        f = currencylist.get(i).getRate();
+                    } else if (a.contains(toSell)){
+                        vorschlag[m] = a;
+                        h = currencylist.get(i).getRate();
+                    }
+                }
+
+                double umgerechneterBetrag = Umrechner(f, h, wert);
+
+                System.out.println("Buying "+wert+" of "+toBuy);
+                System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart);
+
             } else if (e.equals("x")) {
-                auswahlGesetzt = true;
+
                 break;
 
             } else {
@@ -150,11 +165,13 @@ public class Main {
 
         }
 
-
     }
 
-
-    private static double Umrechner (String buy, String sell){
-        return 1.2;
+    private static double Umrechner(String buy, String sell, double geldbetrag) {
+        Double rateBuy = Double.valueOf(buy);
+        Double rateSell = Double.valueOf(sell);
+        double sdr = geldbetrag/rateBuy;
+        double umgerechneterBetrag = sdr*rateSell;
+        return umgerechneterBetrag;
     }
 }
