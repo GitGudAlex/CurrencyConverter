@@ -1,5 +1,6 @@
 package project;
 
+import javax.xml.stream.events.EndDocument;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -75,27 +76,78 @@ public class Main {
 
                     }
                 }
+
+                System.out.println("\n" + select);
                 e = eingabe.next();
 
                 for(int i = 0; i<vorschlag.length; i++)
 
                     if(e.equals(""+i)){
-                        System.out.println("Depp");
+                        toBuy = vorschlag[i];
+
+                        System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
+
                     }
+
+                System.out.println(auswahlStart+"\n\n"+exitStart);
+                    auswahlGesetzt = false;
+
 
             } else if (e.equals("1")) {
                 auswahlGesetzt = true;
 
+                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++"+"\n"+auswahlStart+"\n\n\n"+exitStart+"\n"+auswahl);
+
+                e = eingabe.next();
+
+                int j = 0;
+                String[] vorschlag = new String[50];
+                for(int i = 0; i<50; i++){
+
+                    String a = currencylist.get(i).getName();
+
+                    if (a.contains(e)) {
+                        vorschlag [j] = a;
+                        System.out.println(j + ": " + vorschlag[j]);
+                        j++;
+
+                    }
+                }
+
+                System.out.println("\n" + select);
+                e = eingabe.next();
+
+                for(int i = 0; i<vorschlag.length; i++)
+
+                    if(e.equals(""+i)){
+                        toSell = vorschlag[i];
+
+                        System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
+
+                    }
+
+                System.out.println(auswahlStart+"\n\n"+exitStart);
+                auswahlGesetzt = false;
+
+
+
+
             } else if (e.equals("2")) {
                 auswahlGesetzt = true;
 
+                System.out.println(auswahl2);
+
+                double wert = eingabe.nextDouble();
+
             } else if (e.equals("x")) {
                 auswahlGesetzt = true;
+                break;
 
             } else {
                 System.out.println("ungültige Eingabe!");
                 eingabe.next();
             }
+
         }
 
 
