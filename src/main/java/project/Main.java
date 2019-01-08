@@ -12,8 +12,8 @@ public class Main {
 
         String toBuy = "not set";
         String toSell = "not set";
-        String top = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++";
         String sternchen = "++++++++++++++++++++++++++++";
+        String top = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen;
         String exitStart = "Please choose an option (>>x<< to exit)";
         String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
@@ -58,7 +58,7 @@ public class Main {
 
             if (e.equals("0")) {
 
-                System.out.println(top + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
 
                 e = eingabe.next();
 
