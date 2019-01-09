@@ -20,8 +20,13 @@ public class Main {
         String select = "Select a currency by index:";
         String auswahl2 = "Enter an amount:";
         String c;
+        String a = "";
+        String f = "";
+        String h = "";
 
         int b = 0;
+        int j = 0;
+        int m = 0;
 
         boolean zweiAusgewählt = false;
         boolean auswahlGesetzt = false;
@@ -40,8 +45,8 @@ public class Main {
             while (s.hasNext()) {
 
                 c = s.nextLine();
-                String a[] = c.split(":");
-                Currency neu = new Currency(a[0], a[1]);
+                String p[] = c.split(":");
+                Currency neu = new Currency(p[0], p[1]);
                 currencylist.add(b, neu);
                 //System.out.println(currencylist.get(b).getRate());
                 b++;
@@ -71,11 +76,11 @@ public class Main {
 
                 e = eingabe.next();
 
-                int j = 0;
+                j = 0;
                 String[] vorschlag = new String[50];
                 for (int i = 0; i < 50; i++) {
 
-                    String a = currencylist.get(i).getName();
+                    a = currencylist.get(i).getName();
 
                     if (a.contains(e)) {
                         vorschlag[j] = a;
@@ -95,9 +100,24 @@ public class Main {
                         if (zweiAusgewählt == false) {
                             System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
                         } else if (zweiAusgewählt == true){
+
+                            for (i = 0; i < 50; i++) {
+
+                                a = currencylist.get(i).getName();
+
+                                if (a.contains(toBuy)) {
+                                    vorschlag[j] = a;
+                                    f = currencylist.get(i).getRate();
+                                } else if (a.contains(toSell)){
+                                    vorschlag[m] = a;
+                                    h = currencylist.get(i).getRate();
+                                }
+                            }
+
+                            umgerechneterBetrag = Umrechner(f, h, wert);
+
                             System.out.println("Buying "+wert+" of "+toBuy);
                             System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
-                            
                         }
                     }
 
@@ -107,15 +127,22 @@ public class Main {
 
             } else if (e.equals("1")) {
 
-                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++" + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                if (zweiAusgewählt==false) {
+                    System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                } else if (zweiAusgewählt == true) {
+                    System.out.println("Buying "+wert+" of "+toBuy);
+                    System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                    System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
+                }
+
 
                 e = eingabe.next();
 
-                int j = 0;
+                j = 0;
                 String[] vorschlag = new String[50];
                 for (int i = 0; i < 50; i++) {
 
-                    String a = currencylist.get(i).getName();
+                    a = currencylist.get(i).getName();
 
                     if (a.contains(e)) {
                         vorschlag[j] = a;
@@ -147,13 +174,13 @@ public class Main {
 
                 wert = eingabe.nextDouble();
 
-                int j = 0;
-                int m = 0;
-                String f = "",h = "";
+
+                f = "";
+                h = "";
                 String[] vorschlag = new String[50];
                 for (int i = 0; i < 50; i++) {
 
-                    String a = currencylist.get(i).getName();
+                    a = currencylist.get(i).getName();
 
                     if (a.contains(toBuy)) {
                         vorschlag[j] = a;
