@@ -26,6 +26,9 @@ public class Main {
         boolean zweiAusgewählt = false;
         boolean auswahlGesetzt = false;
 
+        double umgerechneterBetrag = 0;
+        double wert = 0;
+
 
         File file = new File("currencies.csv");
 
@@ -58,7 +61,13 @@ public class Main {
 
             if (e.equals("0")) {
 
-                System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                if (zweiAusgewählt==false) {
+                    System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                } else if (zweiAusgewählt == true) {
+                    System.out.println("Buying "+wert+" of "+toBuy);
+                    System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                    System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
+                }
 
                 e = eingabe.next();
 
@@ -83,12 +92,17 @@ public class Main {
 
                     if (e.equals("" + i)) {
                         toBuy = vorschlag[i];
-
-                        System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
-
+                        if (zweiAusgewählt == false) {
+                            System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
+                        } else if (zweiAusgewählt == true){
+                            System.out.println("Buying "+wert+" of "+toBuy);
+                            System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                            
+                        }
                     }
 
                 System.out.println(auswahlStart + "\n\n" + exitStart);
+
 
 
             } else if (e.equals("1")) {
@@ -127,9 +141,11 @@ public class Main {
 
             } else if (e.equals("2")) {
 
+                zweiAusgewählt = true;
+
                 System.out.println(auswahl2);
 
-                double wert = eingabe.nextDouble();
+                wert = eingabe.nextDouble();
 
                 int j = 0;
                 int m = 0;
@@ -148,7 +164,7 @@ public class Main {
                     }
                 }
 
-                double umgerechneterBetrag = Umrechner(f, h, wert);
+                umgerechneterBetrag = Umrechner(f, h, wert);
 
                 System.out.println("Buying "+wert+" of "+toBuy);
                 System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
