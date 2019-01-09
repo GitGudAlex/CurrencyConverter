@@ -8,116 +8,95 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
+    public static ArrayList<Currency> currencylist = new ArrayList<>();
+
     public static void main(String[] args) {
 
 
         String toBuy = "not set";
         String toSell = "not set";
-        String sternchen = "++++++++++++++++++++++++++++";
-        String top = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen;
-        String exitStart = "Please choose an option (>>x<< to exit)";
-        String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
-        String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
-        String select = "Select a currency by index:";
-        String auswahl2 = "Enter an amount:";
-        String c;
-        String a = "";
+
+        final String exitStart = "Please choose an option (>>x<< to exit)";
+        final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
+        final String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
+        final String select = "Select a currency by index:";
+        final String auswahl2 = "Enter an amount:";
+        String kopfbereich = "";
+        String zwischenspeicher;
+
+        String [] vorschlag = new String[50];
+        String eingabe;
+        String zwischenspeicherLänder = "";
         String f = "";
         String h = "";
 
-        int b = 0;
+        int listenNummer = 0;
         int j = 0;
         int m = 0;
 
-        boolean zweiAusgewählt = false;
+        boolean betragAusgewählt = false;
         boolean auswahlGesetzt = false;
 
         double umgerechneterBetrag = 0;
-        double wert = 0;
+        double eingegebenerWert = 0;
 
 
         File file = new File("currencies.csv");
 
 
-        ArrayList<Currency> currencylist = new ArrayList<>();
-
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-
-                c = s.nextLine();
-                String p[] = c.split(":");
-                Currency neu = new Currency(p[0], p[1]);
-                currencylist.add(b, neu);
-                b++;
-
-
+                zwischenspeicher = s.nextLine();
+                String p[] = zwischenspeicher.split(":");
+                Currency neuesObjekt = new Currency(p[0], p[1]);
+                currencylist.add(listenNummer, neuesObjekt);
+                listenNummer++;
             }
         } catch (FileNotFoundException e) {
+            System.out.println("Datei nicht gefunden");
             e.printStackTrace();
         }
 
-        System.out.println(top + "\n" + auswahlStart + "\n\n\n" + exitStart);
+        System.out.println(KopfbereichEins(toSell,toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
-        Scanner eingabe = new Scanner(System.in);
+        Scanner scannerEingabe = new Scanner(System.in);
 
-        while (eingabe.hasNext() && auswahlGesetzt == false) {
-            String e = eingabe.next();
+        while (scannerEingabe.hasNext() && auswahlGesetzt == false) {
+            eingabe = scannerEingabe.next();
 
-            if (e.equals("0")) {
+            if (eingabe.equals("0")) {
 
-                if (zweiAusgewählt==false) {
-                    System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
-                } else if (zweiAusgewählt == true) {
-                    System.out.println("Buying "+wert+" of "+toBuy);
-                    System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
-                    System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
+                if (betragAusgewählt==false) {
+                    kopfbereich = KopfbereichEins(toSell,toBuy);
+                } else if (betragAusgewählt == true) {
+                   kopfbereich = KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag);
                 }
 
-                e = eingabe.next();
+                System.out.println(kopfbereich + "\n" + auswahlStart + "\n\n" + exitStart + "\n" + auswahl);
 
-                j = 0;
-                String[] vorschlag = new String[50];
-                for (int i = 0; i < 50; i++) {
+                eingabe = scannerEingabe.next();
 
-                    a = currencylist.get(i).getName();
-
-                    if (a.contains(e)) {
-                        vorschlag[j] = a;
-                        System.out.println(j + ": " + vorschlag[j]);
-                        j++;
-
-                    }
-                }
-
+                System.out.println(kopfbereich);
+                MöglichkeitenAuswahl(eingabe);
                 System.out.println("\n" + select);
-                e = eingabe.next();
+
+                eingabe = scannerEingabe.next();
 
                 for (int i = 0; i < vorschlag.length; i++)
 
-                    if (e.equals("" + i)) {
+                    if (eingabe.equals("" + i)) {
                         toBuy = vorschlag[i];
-                        if (zweiAusgewählt == false) {
-                            System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
-                        } else if (zweiAusgewählt == true){
+                        if (betragAusgewählt == false) {
+                            System.out.println(KopfbereichEins(toSell,toBuy));
+                        } else if (betragAusgewählt == true){
 
-                            for (i = 0; i < 50; i++) {
+                            String [] sdrWert = SDRWert(toSell,toBuy);
 
-                                a = currencylist.get(i).getName();
+                            umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
 
-                                if (a.contains(toBuy)) {
-                                    vorschlag[j] = a;
-                                    f = currencylist.get(i).getRate();
-                                } else if (a.contains(toSell)){
-                                    vorschlag[m] = a;
-                                    h = currencylist.get(i).getRate();
-                                }
-                            }
-
-                            umgerechneterBetrag = Umrechner(f, h, wert);
-
-                            System.out.println("Buying "+wert+" of "+toBuy);
-                            System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                            System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag));
                         }
                     }
 
@@ -125,27 +104,25 @@ public class Main {
 
 
 
-            } else if (e.equals("1")) {
+            } else if (eingabe.equals("1")) {
 
-                if (zweiAusgewählt==false) {
-                    System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n" + sternchen + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
-                } else if (zweiAusgewählt == true) {
-                    System.out.println("Buying "+wert+" of "+toBuy);
-                    System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
-                    System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
+                if (betragAusgewählt==false) {
+                    System.out.println(KopfbereichEins(toSell,toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
+                } else if (betragAusgewählt == true) {
+                    System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
                 }
 
 
-                e = eingabe.next();
+                eingabe = scannerEingabe.next();
 
                 j = 0;
-                String[] vorschlag = new String[50];
+
                 for (int i = 0; i < 50; i++) {
 
-                    a = currencylist.get(i).getName();
+                    zwischenspeicherLänder = currencylist.get(i).getName();
 
-                    if (a.contains(e)) {
-                        vorschlag[j] = a;
+                    if (zwischenspeicherLänder.contains(eingabe)) {
+                        vorschlag[j] = zwischenspeicherLänder;
                         System.out.println(j + ": " + vorschlag[j]);
                         j++;
 
@@ -153,87 +130,126 @@ public class Main {
                 }
 
                 System.out.println("\n" + select);
-                e = eingabe.next();
+                eingabe = scannerEingabe.next();
 
                 for (int i = 0; i < vorschlag.length; i++)
 
-                    if (e.equals("" + i)) {
+                    if (eingabe.equals("" + i)) {
                         toSell = vorschlag[i];
-                        if (zweiAusgewählt == false) {
-                            System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
-                        } else if (zweiAusgewählt == true){
+                        if (betragAusgewählt == false) {
+                            System.out.println(KopfbereichEins(toSell,toBuy));
+                        } else if (betragAusgewählt == true){
 
                             for (i = 0; i < 50; i++) {
 
-                                a = currencylist.get(i).getName();
+                                zwischenspeicherLänder = currencylist.get(i).getName();
 
-                                if (a.contains(toBuy)) {
-                                    vorschlag[j] = a;
+                                if (zwischenspeicherLänder.contains(toBuy)) {
+                                    vorschlag[j] = zwischenspeicherLänder;
                                     f = currencylist.get(i).getRate();
-                                } else if (a.contains(toSell)){
-                                    vorschlag[m] = a;
+                                } else if (zwischenspeicherLänder.contains(toSell)){
+                                    vorschlag[m] = zwischenspeicherLänder;
                                     h = currencylist.get(i).getRate();
                                 }
                             }
 
-                            umgerechneterBetrag = Umrechner(f, h, wert);
+                            //umgerechneterBetrag = Umrechner(, eingegebenerWert);
 
-                            System.out.println("Buying "+wert+" of "+toBuy);
-                            System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                            System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag));
                         }
                     }
 
                 System.out.println(auswahlStart + "\n\n" + exitStart);
 
-            } else if (e.equals("2")) {
+            } else if (eingabe.equals("2")) {
 
-                zweiAusgewählt = true;
+                betragAusgewählt = true;
 
                 System.out.println(auswahl2);
 
-                wert = eingabe.nextDouble();
+                eingegebenerWert = scannerEingabe.nextDouble();
 
 
                 f = "";
                 h = "";
-                String[] vorschlag = new String[50];
+
                 for (int i = 0; i < 50; i++) {
 
-                    a = currencylist.get(i).getName();
+                    zwischenspeicherLänder = currencylist.get(i).getName();
 
-                    if (a.contains(toBuy)) {
-                        vorschlag[j] = a;
+                    if (zwischenspeicherLänder.contains(toBuy)) {
+                        vorschlag[j] = zwischenspeicherLänder;
                         f = currencylist.get(i).getRate();
-                    } else if (a.contains(toSell)){
-                        vorschlag[m] = a;
+                    } else if (zwischenspeicherLänder.contains(toSell)){
+                        vorschlag[m] = zwischenspeicherLänder;
                         h = currencylist.get(i).getRate();
                     }
                 }
 
-                umgerechneterBetrag = Umrechner(f, h, wert);
+               // umgerechneterBetrag = Umrechner(f, h, eingegebenerWert);
 
-                System.out.println("Buying "+wert+" of "+toBuy);
-                System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
-                System.out.println(sternchen+"\n"+auswahlStart+"\n\n"+exitStart);
+                System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart);
 
-            } else if (e.equals("x")) {
+            } else if (eingabe.equals("x")) {
 
                 break;
 
             } else {
                 System.out.println("ungültige Eingabe!");
-                eingabe.next();
+                scannerEingabe.next();
             }
 
         }
 
     }
 
-    private static double Umrechner(String buy, String sell, double geldbetrag) {
-        Double rateBuy = Double.valueOf(buy);
-        Double rateSell = Double.valueOf(sell);
+    private static double Umrechner(String [] wert, double geldbetrag) {
+        Double rateBuy = Double.valueOf(wert[1]);
+        Double rateSell = Double.valueOf(wert[0]);
         double sdr = geldbetrag/rateBuy;
         double umgerechneterBetrag = sdr*rateSell;
         return umgerechneterBetrag;
+    }
+
+    private static String KopfbereichEins (String toSell, String toBuy){
+        String s = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
+                    "\n++++++++++++++++++++++++++++++++++";
+        return s;
+    }
+
+    private static String KopfbereichZwei (String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert){
+        String s = "Buying: " + umzurechnenderWert + " " + toBuy + "\n" +
+                    "Selling: " + umgerechneterWert + " " + toSell +
+                    "\n++++++++++++++++++++++++++++++++++";
+        return s;
+    }
+
+    private static String[] SDRWert (String toSell, String toBuy){
+        String [] wert = new String [2];
+        for (int i = 0 ; i < 50 ; i++){
+            String zwischenspeicher = currencylist.get(i).getName();
+            if(zwischenspeicher.contains(toSell)){
+                wert [0]= currencylist.get(i).getRate();
+            } else if (zwischenspeicher.contains(toBuy)){
+                wert[1]=currencylist.get(i).getRate();
+            }
+        }
+        return wert;
+    }
+
+
+    private static String[] MöglichkeitenAuswahl (String eingabe){
+        int zähler = 0;
+        String [] vorschlag = new String [50];
+        for(int i = 0 ; i < vorschlag.length ; i++){
+            String zwischenspeicher = currencylist.get(i).getName();
+
+            if(zwischenspeicher.contains(eingabe)){
+                vorschlag [zähler] = zwischenspeicher;
+                System.out.println(zähler + ":" + vorschlag[zähler]);
+                zähler++;
+            }
+        }
+        return vorschlag;
     }
 }
