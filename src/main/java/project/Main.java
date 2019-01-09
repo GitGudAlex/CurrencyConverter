@@ -1,5 +1,6 @@
 package project;
 
+import javax.swing.*;
 import javax.xml.stream.events.EndDocument;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,7 +49,6 @@ public class Main {
                 String p[] = c.split(":");
                 Currency neu = new Currency(p[0], p[1]);
                 currencylist.add(b, neu);
-                //System.out.println(currencylist.get(b).getRate());
                 b++;
 
 
@@ -159,9 +159,28 @@ public class Main {
 
                     if (e.equals("" + i)) {
                         toSell = vorschlag[i];
+                        if (zweiAusgewählt == false) {
+                            System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
+                        } else if (zweiAusgewählt == true){
 
-                        System.out.println("Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell + "\n++++++++++++++++++++++++++++");
+                            for (i = 0; i < 50; i++) {
 
+                                a = currencylist.get(i).getName();
+
+                                if (a.contains(toBuy)) {
+                                    vorschlag[j] = a;
+                                    f = currencylist.get(i).getRate();
+                                } else if (a.contains(toSell)){
+                                    vorschlag[m] = a;
+                                    h = currencylist.get(i).getRate();
+                                }
+                            }
+
+                            umgerechneterBetrag = Umrechner(f, h, wert);
+
+                            System.out.println("Buying "+wert+" of "+toBuy);
+                            System.out.println("Selling "+umgerechneterBetrag+" of "+toSell);
+                        }
                     }
 
                 System.out.println(auswahlStart + "\n\n" + exitStart);
