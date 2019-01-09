@@ -13,39 +13,47 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Variablendeklaration
 
+        // Strings
         String toBuy = "not set";
         String toSell = "not set";
+        String eingabe;
+        String zwischenspeicherLänder = "";
+        String kopfbereich = "";
+        String zwischenspeicher;
 
+        // konstante Strings
         final String exitStart = "Please choose an option (>>x<< to exit)";
         final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         final String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
         final String select = "Select a currency by index:";
         final String auswahl2 = "Enter an amount:";
-        String kopfbereich = "";
-        String zwischenspeicher;
 
+        // String Array
         String [] vorschlag = new String[50];
-        String eingabe;
-        String zwischenspeicherLänder = "";
-        String f = "";
-        String h = "";
+        String [] sdrWert;
 
+        // Integervariablen
         int listenNummer = 0;
         int j = 0;
         int m = 0;
 
+        // boolean
         boolean betragAusgewählt = false;
         boolean auswahlGesetzt = false;
 
+
+        // Doublevariablen
         double umgerechneterBetrag = 0;
         double eingegebenerWert = 0;
 
-
+        // Dateifile der Datei currencies.csv, die die SDR Werte enthält
         File file = new File("currencies.csv");
 
 
         try {
+            // Deklaration Scanner zur Abfrage der Benutzereingabe um eine Auswahl zu treffen
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 zwischenspeicher = s.nextLine();
@@ -92,7 +100,7 @@ public class Main {
                             System.out.println(KopfbereichEins(toSell,toBuy));
                         } else if (betragAusgewählt == true){
 
-                            String [] sdrWert = SDRWert(toSell,toBuy);
+                            sdrWert = SDRWert(toSell,toBuy);
 
                             umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
 
@@ -140,20 +148,9 @@ public class Main {
                             System.out.println(KopfbereichEins(toSell,toBuy));
                         } else if (betragAusgewählt == true){
 
-                            for (i = 0; i < 50; i++) {
+                            sdrWert = SDRWert(toSell,toBuy);
 
-                                zwischenspeicherLänder = currencylist.get(i).getName();
-
-                                if (zwischenspeicherLänder.contains(toBuy)) {
-                                    vorschlag[j] = zwischenspeicherLänder;
-                                    f = currencylist.get(i).getRate();
-                                } else if (zwischenspeicherLänder.contains(toSell)){
-                                    vorschlag[m] = zwischenspeicherLänder;
-                                    h = currencylist.get(i).getRate();
-                                }
-                            }
-
-                            //umgerechneterBetrag = Umrechner(, eingegebenerWert);
+                            umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
 
                             System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag));
                         }
@@ -169,24 +166,8 @@ public class Main {
 
                 eingegebenerWert = scannerEingabe.nextDouble();
 
-
-                f = "";
-                h = "";
-
-                for (int i = 0; i < 50; i++) {
-
-                    zwischenspeicherLänder = currencylist.get(i).getName();
-
-                    if (zwischenspeicherLänder.contains(toBuy)) {
-                        vorschlag[j] = zwischenspeicherLänder;
-                        f = currencylist.get(i).getRate();
-                    } else if (zwischenspeicherLänder.contains(toSell)){
-                        vorschlag[m] = zwischenspeicherLänder;
-                        h = currencylist.get(i).getRate();
-                    }
-                }
-
-               // umgerechneterBetrag = Umrechner(f, h, eingegebenerWert);
+                sdrWert = SDRWert(toSell, toBuy);
+                umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
 
                 System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart);
 
@@ -202,21 +183,56 @@ public class Main {
         }
 
     }
+    // Methoden
 
+    /**
+     * Methode Umrechner: rechnet den von Benutzer eingegebenen Geldbetrag, mithilfe des
+     * SDR Wertes in die gewünschte Währung um.
+     * Dazu wird der vom Benutzer eingegebene Wert, sowie die SDR-Werte von der
+     * toBuy-Währung und der toSell-Währung übergeben.
+     * @param wert SDR-Werte der Währungen
+     * @param geldbetrag vom Benutzer eingegebener Betrag zum umrechnen
+     * @return umgerechneter Betrag
+     */
     private static double Umrechner(String [] wert, double geldbetrag) {
+        //Umwandlung des SDR-Wertes aus einem StringArray in eine Variable vom Typ double
         Double rateBuy = Double.valueOf(wert[1]);
         Double rateSell = Double.valueOf(wert[0]);
+        /*Der umzurechnende Geldbetrag wird durch den SDR-Wert der toBuy Währung dividiert
+          und in einer Doublevariable sdr zwischengespeichert
+         */
         double sdr = geldbetrag/rateBuy;
+        /*Der zwischengespeicherte SDR-Betrag wird mit dem SDR-Wert der toSell Währung multipliziert
+          und in eine Doublevariable umgerechneter Betrag gespeichert, diese anschließend von der Methode
+          zurückgegeben wird.
+         */
         double umgerechneterBetrag = sdr*rateSell;
         return umgerechneterBetrag;
     }
 
+    /**
+     * Methode KopfbereichEins: Methode zur Ausgabe des Kopfbereich, solange noch kein Betrag
+     * zum Umrechnen eingegeben wurde.
+     * @param toSell Währung des Landes
+     * @param toBuy Währung des Landes
+     * @returnAusgabe des Kopfbereichs
+     */
     private static String KopfbereichEins (String toSell, String toBuy){
         String s = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
                     "\n++++++++++++++++++++++++++++++++++";
         return s;
     }
 
+
+    /**
+     * Methode KopfbereichZwei: Methode zur Ausgabe des Kopfbereich, nachdem bereits ein Betrag
+     * zum Umrechnen eingegeben wurde.
+     * @param toSell Währung des Landes
+     * @param toBuy Währung des Landes
+     * @param umzurechnenderWert eingegebener Wert des Benutzers, der umgerechnet werden soll
+     * @param umgerechneterWert
+     * @return Ausgabe des Kopfbereichs
+     */
     private static String KopfbereichZwei (String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert){
         String s = "Buying: " + umzurechnenderWert + " " + toBuy + "\n" +
                     "Selling: " + umgerechneterWert + " " + toSell +
@@ -224,6 +240,12 @@ public class Main {
         return s;
     }
 
+    /**
+     * Methode SDRWert: Methode zur Auslesen des SDR-Wertes für die jeweilige Währung des Landes
+     * @param toSell Währung des Landes
+     * @param toBuy Währung des Landes
+     * @return SDR-Werte der jeweiligen Währung von toSell und toBuy
+     */
     private static String[] SDRWert (String toSell, String toBuy){
         String [] wert = new String [2];
         for (int i = 0 ; i < 50 ; i++){
@@ -232,12 +254,19 @@ public class Main {
                 wert [0]= currencylist.get(i).getRate();
             } else if (zwischenspeicher.contains(toBuy)){
                 wert[1]=currencylist.get(i).getRate();
+            } else {
+                System.out.println("ungültige Eingabe");
             }
         }
         return wert;
     }
 
-
+    /**
+     * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der Eingabe des Benutzers
+     * teilweise oder ganz übereinstimmen.
+     * @param eingabe übergibt die Benutzereingabe
+     * @return Array vorschlag, der die Auswahl der Länder enthält
+     */
     private static String[] MöglichkeitenAuswahl (String eingabe){
         int zähler = 0;
         String [] vorschlag = new String [50];
