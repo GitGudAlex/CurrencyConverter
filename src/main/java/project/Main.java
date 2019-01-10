@@ -37,7 +37,6 @@ public class Main {
         // Integervariablen
         int listenNummer = 0;
         int j = 0;
-        int m = 0;
 
         // boolean
         boolean betragAusgewählt = false;
@@ -71,14 +70,14 @@ public class Main {
 
         Scanner scannerEingabe = new Scanner(System.in);
 
-        while (scannerEingabe.hasNext() && auswahlGesetzt == false) {
+        while (scannerEingabe.hasNext() && !auswahlGesetzt) {
             eingabe = scannerEingabe.next();
 
             if (eingabe.equals("0")) {
 
-                if (betragAusgewählt==false) {
+                if (!betragAusgewählt) {
                     kopfbereich = KopfbereichEins(toSell,toBuy);
-                } else if (betragAusgewählt == true) {
+                } else if (betragAusgewählt) {
                    kopfbereich = KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag);
                 }
 
@@ -96,9 +95,9 @@ public class Main {
 
                     if (eingabe.equals("" + i)) {
                         toBuy = vorschlag[i];
-                        if (betragAusgewählt == false) {
+                        if (!betragAusgewählt) {
                             System.out.println(KopfbereichEins(toSell,toBuy));
-                        } else if (betragAusgewählt == true){
+                        } else if (betragAusgewählt){
 
                             sdrWert = SDRWert(toSell,toBuy);
 
@@ -114,9 +113,9 @@ public class Main {
 
             } else if (eingabe.equals("1")) {
 
-                if (betragAusgewählt==false) {
+                if (!betragAusgewählt) {
                     System.out.println(KopfbereichEins(toSell,toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart + "\n" + auswahl);
-                } else if (betragAusgewählt == true) {
+                } else if (betragAusgewählt) {
                     System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
                 }
 
@@ -144,9 +143,9 @@ public class Main {
 
                     if (eingabe.equals("" + i)) {
                         toSell = vorschlag[i];
-                        if (betragAusgewählt == false) {
+                        if (!betragAusgewählt) {
                             System.out.println(KopfbereichEins(toSell,toBuy));
-                        } else if (betragAusgewählt == true){
+                        } else if (betragAusgewählt){
 
                             sdrWert = SDRWert(toSell,toBuy);
 
@@ -207,6 +206,8 @@ public class Main {
           zurückgegeben wird.
          */
         double umgerechneterBetrag = sdr*rateSell;
+        umgerechneterBetrag = Math.round(umgerechneterBetrag *100); //Auf 2 Nachkommastellen runden (Zwischenlösung)1
+        umgerechneterBetrag /= 100;
         return umgerechneterBetrag;
     }
 
@@ -278,7 +279,13 @@ public class Main {
                 System.out.println(zähler + ":" + vorschlag[zähler]);
                 zähler++;
             }
+            /*else{
+                System.out.println("Currency doesn't exist.");
+                Bei Falscher Währung(Bsp: "euro") läuft das Programm ohne Vorschläge weiter.
+                   erneuteAusgabe String Auswahl, Scanner, Methode möglichkeit, Auswahl erneut aufrufen
+
+            }*/
         }
-        return vorschlag;
+        return vorschlag; //Null beheben -> höchste Priorität!!
     }
 }
