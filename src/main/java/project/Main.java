@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static ArrayList<Currency> currencylist = new ArrayList<>();
-    public static int p = 0;
+    public static int laengeArrayAuswahl = 0;
 
     public static void main(String[] args) {
 
@@ -86,15 +86,17 @@ public class Main {
 
                 eingabe = scannerEingabe.next();
 
-                System.out.println(kopfbereich);
+
 
                 while(EingabeKorrekt(eingabe)==false){
                     System.out.println("currency does not exist. Please try again");
                     eingabe = scannerEingabe.next();
                     System.out.println(eingabe+EingabeKorrekt(eingabe));
                 }
+
+                System.out.println(kopfbereich);
                 MöglichkeitenAuswahl(eingabe);
-                String [] vorschlag = new String[p];
+                String [] vorschlag = new String[laengeArrayAuswahl];
 
                 for (int i = 0 ; i<vorschlag.length; i++){
                     vorschlag[i]=MöglichkeitenAuswahl(eingabe)[i];
@@ -132,7 +134,7 @@ public class Main {
                 } else if (betragAusgewählt) {
                     System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
                 }
-                String [] vorschlag = new String [p];
+                String [] vorschlag = new String [laengeArrayAuswahl];
 
                 eingabe = scannerEingabe.next();
 
@@ -293,15 +295,10 @@ public class Main {
 
                 zähler++;
             }
-            /*else{
-                System.out.println("Currency doesn't exist.");
-                Bei Falscher Währung(Bsp: "euro") läuft das Programm ohne Vorschläge weiter.
-                   erneuteAusgabe String Auswahl, Scanner, Methode möglichkeit, Auswahl erneut aufrufen
 
-            }*/
         }
-        p = zähler;
-        return vorschlag; //Null beheben -> höchste Priorität!!
+        laengeArrayAuswahl = zähler;
+        return vorschlag;
     }
 
     private static boolean EingabeKorrekt (String eingabe){
