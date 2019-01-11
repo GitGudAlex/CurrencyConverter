@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static ArrayList<Currency> currencylist = new ArrayList<>();
+    public static int p = 0;
 
     public static void main(String[] args) {
 
@@ -31,7 +32,7 @@ public class Main {
         final String auswahl2 = "Enter an amount:";
 
         // String Array
-        String [] vorschlag = new String[50];
+
         String [] sdrWert;
 
         // Integervariablen
@@ -86,7 +87,20 @@ public class Main {
                 eingabe = scannerEingabe.next();
 
                 System.out.println(kopfbereich);
+
+                while(EingabeKorrekt(eingabe)==false){
+                    System.out.println("currency does not exist. Please try again");
+                    eingabe = scannerEingabe.next();
+                    System.out.println(eingabe+EingabeKorrekt(eingabe));
+                }
                 MöglichkeitenAuswahl(eingabe);
+                String [] vorschlag = new String[p];
+
+                for (int i = 0 ; i<vorschlag.length; i++){
+                    vorschlag[i]=MöglichkeitenAuswahl(eingabe)[i];
+                    System.out.println(i + ":" + vorschlag[i]);
+                }
+
                 System.out.println("\n" + select);
 
                 eingabe = scannerEingabe.next();
@@ -118,7 +132,7 @@ public class Main {
                 } else if (betragAusgewählt) {
                     System.out.println(KopfbereichZwei(toSell,toBuy,eingegebenerWert,umgerechneterBetrag)+"\n"+auswahlStart+"\n\n"+exitStart+"\n"+auswahl);
                 }
-
+                String [] vorschlag = new String [p];
 
                 eingabe = scannerEingabe.next();
 
@@ -273,10 +287,10 @@ public class Main {
         String [] vorschlag = new String [50];
         for(int i = 0 ; i < vorschlag.length ; i++){
             String zwischenspeicher = currencylist.get(i).getName();
+            String ausgabe = zwischenspeicher;
+            if(zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())){
+                vorschlag [zähler] = ausgabe;
 
-            if(zwischenspeicher.contains(eingabe)){
-                vorschlag [zähler] = zwischenspeicher;
-                System.out.println(zähler + ":" + vorschlag[zähler]);
                 zähler++;
             }
             /*else{
@@ -286,6 +300,23 @@ public class Main {
 
             }*/
         }
+        p = zähler;
         return vorschlag; //Null beheben -> höchste Priorität!!
+    }
+
+    private static boolean EingabeKorrekt (String eingabe){
+        boolean test = true;
+
+        for(int i = 0 ; i < 50 ; i++){
+            String zwischenspeicher = currencylist.get(i).getName();
+            if(zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())){
+                return test = true;
+            } else if(!zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())){
+                test = false;
+            }
+
+        }
+
+        return test;
     }
 }
