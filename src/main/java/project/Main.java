@@ -15,32 +15,37 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /* Folgende Fehlermeldungen gilt es noch zu beheben:
+        - Werteingabe z.B. 3,477777
+        - Werteingabe vor Länderauswahl (entweder Wert iwo abspeichern oder println "zuerst Währung auswählen
+          vor Umrechnungsvorgang
+        - Auswahl 2 ebenfalls in eine Methode schreiben?
+        - Wenn Währung vollständig eingegeben wird bzw nur ein Array zur Verfügung steht direkt auswählen
+        - Wenn bei der Eingabe des Wertes ein Punkt statt ein Komma geschrieben wird kommt es momentan noch zu
+          einer Fehlermeldung
+        - eine Angabe des SDR Wertes in der currencies.csv Datei ist mit einem Komma geschrieben
+         */
+
         // Variablendeklaration
 
         // Strings
         String toBuy = "not set";
         String toSell = "not set";
         String eingabe;
-        String eingabeAusgabe = "";
         String zwischenspeicherLänder = "";
-        String kopfbereich = "";
         String zwischenspeicher;
 
         // konstante Strings
         final String exitStart = "Please choose an option (>>x<< to exit)";
         final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
-        final String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
-        final String select = "Select a currency by index:";
         final String auswahl2 = "Enter an amount:";
 
         // String Array
 
         String[] sdrWert;
-        String[] toBuyAndToSell = new String[2];
 
         // Integervariablen
         int listenNummer = 0;
-        int j = 0;
 
         // boolean
         boolean betragAusgewählt = false;
@@ -72,8 +77,9 @@ public class Main {
 
         System.out.println(KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
-        while (scannerEingabe.hasNext() && !auswahlGesetzt) {
+        while (scannerEingabe.hasNext() || auswahlGesetzt) {
             eingabe = scannerEingabe.next();
+            auswahlGesetzt = false;
 
             if (eingabe.equals("0")) {
                 toBuy = Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
@@ -98,8 +104,8 @@ public class Main {
                 break;
 
             } else {
-                System.out.println("ungültige Eingabe!");
-                scannerEingabe.next();
+                System.out.println("ungültige Eingabe! Please try again.");
+                auswahlGesetzt = true;
             }
 
         }
