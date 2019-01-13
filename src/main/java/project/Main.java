@@ -196,30 +196,47 @@ public class Main {
             System.out.println("\n" + select);
 
             eingabe = scannerEingabe.next();
+
         } else {
             vorschlag [0] = MöglichkeitenAuswahl(eingabe)[0];
             eingabe = "0";
         }
 
-        for (int i = 0; i < vorschlag.length; i++)
+        for (int i = 0; i < vorschlag.length; i++){
+            int e;
+            if(!Helper.bestehtAusZahlen(eingabe,vorschlag.length)){
+                e=Integer.parseInt(eingabe);
 
-            if (eingabe.equals("" + i)) {
-                if (eingabeAuswahl.equals("0")) {
-                    toBuy = vorschlag[i];
-                } else if (eingabeAuswahl.equals("1")) {
-                    toSell = vorschlag[i];
+                if (eingabe.equals("" + i)) {
+                    if (eingabeAuswahl.equals("0")) {
+                        toBuy = vorschlag[i];
+                    } else if (eingabeAuswahl.equals("1")) {
+                        toSell = vorschlag[i];
+                    }
+                    if (!betragAusgewählt) {
+                        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
+                    } else if (betragAusgewählt) {
+
+                        sdrWert = Rechner.SDRWert(toSell, toBuy);
+
+                        umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+
+                        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+                    }
+
+                }else if (!(0<=e&&e<=vorschlag.length)){
+                    System.out.println("Please choose a correct digit!");
+                    eingabe=scannerEingabe.next();
+                    i=-1;
                 }
-                if (!betragAusgewählt) {
-                    System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
-                } else if (betragAusgewählt) {
 
-                    sdrWert = Rechner.SDRWert(toSell, toBuy);
-
-                    umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
-
-                    System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
-                }
+            }else{
+                System.out.println("Please choose a correct digit!");
+                eingabe=scannerEingabe.next();
+                i=-1;
             }
+
+        }
 
         System.out.println(auswahlStart + "\n\n" + exitStart);
 
