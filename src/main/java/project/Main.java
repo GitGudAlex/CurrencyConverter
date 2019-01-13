@@ -19,7 +19,6 @@ public class Main {
     public static void main(String[] args) {
 
         /* Folgende Fehlermeldungen gilt es noch zu beheben:
-        - Werteingabe z.B. 3,477777
         - Werteingabe vor Länderauswahl (entweder Wert iwo abspeichern oder println "zuerst Währung auswählen
           vor Umrechnungsvorgang
         - Auswahl 2 ebenfalls in eine Methode schreiben?
@@ -75,7 +74,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println(KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
+        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
         while (scannerEingabe.hasNext() || auswahlGesetzt) {
             eingabe = scannerEingabe.next();
@@ -90,8 +89,9 @@ public class Main {
 
                 betragAusgewählt = true;
                 System.out.println(auswahl2);
-
-                eingegebenerWert = scannerEingabe.nextDouble();
+                eingabe = scannerEingabe.next();
+                eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe)*100);
+                eingegebenerWert /= 100;
 
                 umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy,eingegebenerWert);
 
@@ -110,36 +110,6 @@ public class Main {
     // Methoden
 
 
-    /**
-     * Methode KopfbereichEins: Methode zur Ausgabe des Kopfbereich, solange noch kein Betrag
-     * zum Umrechnen eingegeben wurde.
-     *
-     * @param toSell Währung des Landes
-     * @param toBuy  Währung des Landes
-     * @returnAusgabe des Kopfbereichs
-     */
-    private static String KopfbereichEins(String toSell, String toBuy) {
-        String s = "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
-                "\n++++++++++++++++++++++++++++++++++";
-        return s;
-    }
-
-    /**
-     * Methode KopfbereichZwei: Methode zur Ausgabe des Kopfbereich, nachdem bereits ein Betrag
-     * zum Umrechnen eingegeben wurde.
-     *
-     * @param toSell             Währung des Landes
-     * @param toBuy              Währung des Landes
-     * @param umzurechnenderWert eingegebener Wert des Benutzers, der umgerechnet werden soll
-     * @param umgerechneterWert
-     * @return Ausgabe des Kopfbereichs
-     */
-    public static String KopfbereichZwei(String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert) {
-        String s = "Buying: " + umzurechnenderWert + " " + toBuy + "\n" +
-                "Selling: " + umgerechneterWert + " " + toSell +
-                "\n++++++++++++++++++++++++++++++++++";
-        return s;
-    }
 
     /**
      * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der Eingabe des Benutzers
@@ -149,19 +119,19 @@ public class Main {
      * @return Array vorschlag, der die Auswahl der Länder enthält
      */
     private static String[] MöglichkeitenAuswahl(String eingabe) {
-        int zähler = 0;
+        int zaehler = 0;
         String[] vorschlag = new String[50];
         for (int i = 0; i < vorschlag.length; i++) {
             String zwischenspeicher = currencylist.get(i).getName();
             String ausgabe = zwischenspeicher;
             if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
-                vorschlag[zähler] = ausgabe;
+                vorschlag[zaehler] = ausgabe;
 
-                zähler++;
+                zaehler++;
             }
 
         }
-        laengeArrayAuswahl = zähler;
+        laengeArrayAuswahl = zaehler;
         return vorschlag;
     }
 
@@ -194,9 +164,9 @@ public class Main {
 
         eingabeAuswahl = eingabe;
         if (!betragAusgewählt) {
-            kopfbereich = KopfbereichEins(toSell, toBuy);
+            kopfbereich = KopfBereich.KopfbereichEins(toSell, toBuy);
         } else if (betragAusgewählt) {
-            kopfbereich = KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag);
+            kopfbereich = KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag);
         }
 
         System.out.println(kopfbereich + "\n" + auswahlStart + "\n\n" + exitStart + "\n" + auswahl);
@@ -231,14 +201,14 @@ public class Main {
                     toSell = vorschlag[i];
                 }
                 if (!betragAusgewählt) {
-                    System.out.println(KopfbereichEins(toSell, toBuy));
+                    System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
                 } else if (betragAusgewählt) {
 
                     sdrWert = Rechner.SDRWert(toSell, toBuy);
 
                     umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
-                    System.out.println(KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+                    System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
                 }
             }
 

@@ -55,8 +55,18 @@ public class Rechner {
         String [] sdrWert = Rechner.SDRWert(toSell, toBuy);
         double umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
-        System.out.println(Main.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + Main.auswahlStart + "\n\n" + Main.exitStart);
+        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + Main.auswahlStart + "\n\n" + Main.exitStart);
         return umgerechneterBetrag;
+    }
+
+    public static double PunktKomma (String eingabe){
+        if(eingabe.contains(".")){
+            eingabe.replace(".", ",");
+        }
+
+        double eingabeDouble = Double.parseDouble(eingabe);
+
+        return eingabeDouble;
     }
 
 }
