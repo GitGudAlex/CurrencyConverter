@@ -18,10 +18,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /* Folgende Fehlermeldungen gilt es noch zu beheben:
-        - eine Angabe des SDR Wertes in der currencies.csv Datei ist mit einem Komma geschrieben
-         */
-
         // Variablendeklaration
 
         // Strings
@@ -60,12 +56,10 @@ public class Main {
                 zwischenspeicher = s.nextLine();
                 String p[] = zwischenspeicher.split(":");
                 korrekterZahlenwert=Currency.korrekterSDRWert(p[1]);
-                System.out.println(korrekterZahlenwert);
 
                 if(korrekterZahlenwert){
                 Currency neuesObjekt = new Currency(p[0], p[1]);
                 currencylist.add(listenNummer, neuesObjekt);
-                    System.out.println(currencylist.get(listenNummer).getName());
                 listenNummer++;
 
                 }
