@@ -1,7 +1,5 @@
 package project;
 
-import javax.swing.*;
-import javax.xml.stream.events.EndDocument;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -12,6 +10,11 @@ public class Main {
     public static ArrayList<Currency> currencylist = new ArrayList<>();
     public static int laengeArrayAuswahl = 0;
     public static Scanner scannerEingabe = new Scanner(System.in);
+
+    public static final String exitStart = "Please choose an option (>>x<< to exit)";
+    public static final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
+    public static final String auswahl2 = "Enter an amount:";
+
 
     public static void main(String[] args) {
 
@@ -36,9 +39,6 @@ public class Main {
         String zwischenspeicher;
 
         // konstante Strings
-        final String exitStart = "Please choose an option (>>x<< to exit)";
-        final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
-        final String auswahl2 = "Enter an amount:";
 
         // String Array
 
@@ -89,15 +89,11 @@ public class Main {
             } else if (eingabe.equals("2")) {
 
                 betragAusgewählt = true;
-
                 System.out.println(auswahl2);
 
                 eingegebenerWert = scannerEingabe.nextDouble();
 
-                sdrWert = SDRWert(toSell, toBuy);
-                umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
-
-                System.out.println(KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + auswahlStart + "\n\n" + exitStart);
+                umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy,eingegebenerWert);
 
             } else if (eingabe.equals("x")) {
 
@@ -113,33 +109,6 @@ public class Main {
     }
     // Methoden
 
-    /**
-     * Methode Umrechner: rechnet den von Benutzer eingegebenen Geldbetrag, mithilfe des
-     * SDR Wertes in die gewünschte Währung um.
-     * Dazu wird der vom Benutzer eingegebene Wert, sowie die SDR-Werte von der
-     * toBuy-Währung und der toSell-Währung übergeben.
-     *
-     * @param wert       SDR-Werte der Währungen
-     * @param geldbetrag vom Benutzer eingegebener Betrag zum umrechnen
-     * @return umgerechneter Betrag
-     */
-    private static double Umrechner(String[] wert, double geldbetrag) {
-        //Umwandlung des SDR-Wertes aus einem StringArray in eine Variable vom Typ double
-        Double rateBuy = Double.valueOf(wert[1]);
-        Double rateSell = Double.valueOf(wert[0]);
-        /*Der umzurechnende Geldbetrag wird durch den SDR-Wert der toBuy Währung dividiert
-          und in einer Doublevariable sdr zwischengespeichert
-         */
-        double sdr = geldbetrag / rateBuy;
-        /*Der zwischengespeicherte SDR-Betrag wird mit dem SDR-Wert der toSell Währung multipliziert
-          und in eine Doublevariable umgerechneter Betrag gespeichert, diese anschließend von der Methode
-          zurückgegeben wird.
-         */
-        double umgerechneterBetrag = sdr * rateSell;
-        umgerechneterBetrag = Math.round(umgerechneterBetrag * 100); //Auf 2 Nachkommastellen runden (Zwischenlösung)1
-        umgerechneterBetrag /= 100;
-        return umgerechneterBetrag;
-    }
 
     /**
      * Methode KopfbereichEins: Methode zur Ausgabe des Kopfbereich, solange noch kein Betrag
@@ -155,7 +124,6 @@ public class Main {
         return s;
     }
 
-
     /**
      * Methode KopfbereichZwei: Methode zur Ausgabe des Kopfbereich, nachdem bereits ein Betrag
      * zum Umrechnen eingegeben wurde.
@@ -166,31 +134,11 @@ public class Main {
      * @param umgerechneterWert
      * @return Ausgabe des Kopfbereichs
      */
-    private static String KopfbereichZwei(String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert) {
+    public static String KopfbereichZwei(String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert) {
         String s = "Buying: " + umzurechnenderWert + " " + toBuy + "\n" +
                 "Selling: " + umgerechneterWert + " " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
         return s;
-    }
-
-    /**
-     * Methode SDRWert: Methode zur Auslesen des SDR-Wertes für die jeweilige Währung des Landes
-     *
-     * @param toSell Währung des Landes
-     * @param toBuy  Währung des Landes
-     * @return SDR-Werte der jeweiligen Währung von toSell und toBuy
-     */
-    private static String[] SDRWert(String toSell, String toBuy) {
-        String[] wert = new String[2];
-        for (int i = 0; i < 50; i++) {
-            String zwischenspeicher = currencylist.get(i).getName();
-            if (zwischenspeicher.contains(toSell)) {
-                wert[0] = currencylist.get(i).getRate();
-            } else if (zwischenspeicher.contains(toBuy)) {
-                wert[1] = currencylist.get(i).getRate();
-            }
-        }
-        return wert;
     }
 
     /**
@@ -286,9 +234,9 @@ public class Main {
                     System.out.println(KopfbereichEins(toSell, toBuy));
                 } else if (betragAusgewählt) {
 
-                    sdrWert = SDRWert(toSell, toBuy);
+                    sdrWert = Rechner.SDRWert(toSell, toBuy);
 
-                    umgerechneterBetrag = Umrechner(sdrWert, eingegebenerWert);
+                    umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
                     System.out.println(KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
                 }
