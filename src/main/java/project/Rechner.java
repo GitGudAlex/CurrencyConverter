@@ -39,7 +39,7 @@ public class Rechner {
      */
     public static String[] SDRWert(String toSell, String toBuy) {
         String[] wert = new String[2];
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < Main.currencylist.size(); i++) {
             String zwischenspeicher = Main.currencylist.get(i).getName();
             if (zwischenspeicher.contains(toSell)) {
                 wert[0] = Main.currencylist.get(i).getRate();
@@ -68,5 +68,6 @@ public class Rechner {
 
         return eingabeDouble;
     }
+
 
 }

@@ -19,8 +19,6 @@ public class Main {
     public static void main(String[] args) {
 
         /* Folgende Fehlermeldungen gilt es noch zu beheben:
-        - Wenn bei der Eingabe des Wertes ein Punkt statt ein Komma geschrieben wird kommt es momentan noch zu
-          einer Fehlermeldung
         - eine Angabe des SDR Wertes in der currencies.csv Datei ist mit einem Komma geschrieben
          */
 
@@ -45,7 +43,7 @@ public class Main {
         // boolean
         boolean betragAusgewählt = false;
         boolean auswahlGesetzt = false;
-
+        boolean korrekterZahlenwert;
 
         // Doublevariablen
         double umgerechneterBetrag = 0;
@@ -61,9 +59,16 @@ public class Main {
             while (s.hasNext()) {
                 zwischenspeicher = s.nextLine();
                 String p[] = zwischenspeicher.split(":");
+                korrekterZahlenwert=Currency.korrekterSDRWert(p[1]);
+                System.out.println(korrekterZahlenwert);
+
+                if(korrekterZahlenwert){
                 Currency neuesObjekt = new Currency(p[0], p[1]);
                 currencylist.add(listenNummer, neuesObjekt);
+                    System.out.println(currencylist.get(listenNummer).getName());
                 listenNummer++;
+
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Datei nicht gefunden");
@@ -122,7 +127,7 @@ public class Main {
      */
     private static String[] MöglichkeitenAuswahl(String eingabe) {
         int zaehler = 0;
-        String[] vorschlag = new String[50];
+        String[] vorschlag = new String[currencylist.size()];
         for (int i = 0; i < vorschlag.length; i++) {
             String zwischenspeicher = currencylist.get(i).getName();
             String ausgabe = zwischenspeicher;
@@ -140,7 +145,7 @@ public class Main {
     private static boolean EingabeKorrekt(String eingabe) {
         boolean test = true;
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < currencylist.size(); i++) {
             String zwischenspeicher = currencylist.get(i).getName();
             if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
                 return test = true;
