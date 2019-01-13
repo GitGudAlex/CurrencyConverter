@@ -19,10 +19,6 @@ public class Main {
     public static void main(String[] args) {
 
         /* Folgende Fehlermeldungen gilt es noch zu beheben:
-        - Werteingabe vor Länderauswahl (entweder Wert iwo abspeichern oder println "zuerst Währung auswählen
-          vor Umrechnungsvorgang
-        - Auswahl 2 ebenfalls in eine Methode schreiben?
-        - Wenn Währung vollständig eingegeben wird bzw nur ein Array zur Verfügung steht direkt auswählen
         - Wenn bei der Eingabe des Wertes ein Punkt statt ein Komma geschrieben wird kommt es momentan noch zu
           einer Fehlermeldung
         - eine Angabe des SDR Wertes in der currencies.csv Datei ist mit einem Komma geschrieben
@@ -87,20 +83,26 @@ public class Main {
 
             } else if (eingabe.equals("2")) {
 
-                betragAusgewählt = true;
-                System.out.println(auswahl2);
-                eingabe = scannerEingabe.next();
-                eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe)*100);
-                eingegebenerWert /= 100;
+                if (toBuy.equals("not set") || toSell.equals("not set")){
+                    System.out.println("Please select a currency");
+                } else {
+                    betragAusgewählt = true;
+                    System.out.println(auswahl2);
+                    eingabe = scannerEingabe.next();
+                    eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe)*100);
+                    eingegebenerWert /= 100;
 
-                umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy,eingegebenerWert);
+                    umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy,eingegebenerWert);
+                }
+
+
 
             } else if (eingabe.equals("x")) {
 
                 break;
 
             } else {
-                System.out.println("ungültige Eingabe! Please try again.");
+                System.out.println("invalid input. Please selecte a currency");
                 auswahlGesetzt = true;
             }
 
@@ -174,23 +176,31 @@ public class Main {
         eingabe = scannerEingabe.next();
 
 
-        while (EingabeKorrekt(eingabe) == false) {
+        while (!EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
             eingabe = scannerEingabe.next();
         }
 
-        System.out.println(kopfbereich);
+
         MöglichkeitenAuswahl(eingabe);
         String[] vorschlag = new String[laengeArrayAuswahl];
 
-        for (int i = 0; i < vorschlag.length; i++) {
-            vorschlag[i] = MöglichkeitenAuswahl(eingabe)[i];
-            System.out.println(i + ":" + vorschlag[i]);
+
+        if (vorschlag.length>1) {
+            System.out.println(kopfbereich);
+            for (int i = 0; i < vorschlag.length; i++) {
+                vorschlag[i] = MöglichkeitenAuswahl(eingabe)[i];
+
+                System.out.println(i + ":" + vorschlag[i]);
+            }
+
+            System.out.println("\n" + select);
+
+            eingabe = scannerEingabe.next();
+        } else {
+            vorschlag [0] = MöglichkeitenAuswahl(eingabe)[0];
+            eingabe = "0";
         }
-
-        System.out.println("\n" + select);
-
-        eingabe = scannerEingabe.next();
 
         for (int i = 0; i < vorschlag.length; i++)
 
