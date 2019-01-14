@@ -43,7 +43,8 @@ public class Rechner {
             String zwischenspeicher = Main.currencylist.get(i).getName();
             if (zwischenspeicher.contains(toSell)) {
                 wert[0] = Main.currencylist.get(i).getRate();
-            } else if (zwischenspeicher.contains(toBuy)) {
+            }
+            if (zwischenspeicher.contains(toBuy)) {
                 wert[1] = Main.currencylist.get(i).getRate();
             }
         }

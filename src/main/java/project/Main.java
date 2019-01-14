@@ -171,6 +171,8 @@ public class Main {
 
         eingabe = scannerEingabe.next();
 
+        //if (eingabe.equals("xxx"))break; der schrott klappt nicht1
+
         while (!EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
             eingabe = scannerEingabe.next();
