@@ -65,7 +65,7 @@ public class Rechner {
             eingabe = eingabe.replaceFirst(",", ".");
 
         }
-            System.out.println(eingabe); // try, catch (NumberFormatException e) sout"Please enter a value."
+             // try, catch (NumberFormatException e) sout"Please enter a value."
             double eingabeDouble = Double.valueOf(eingabe);
 
             return eingabeDouble;

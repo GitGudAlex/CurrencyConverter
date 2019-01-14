@@ -13,6 +13,7 @@ public class RechnerTest {
 
     @Test
     public void SDRWert() {
+        Assert.assertArrayEquals(new String[]{"1.273760", "1.349170"}, Rechner.SDRWert("U.S. dollar", "Euro"));
     }
 
     @Test

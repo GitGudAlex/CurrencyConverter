@@ -18,8 +18,8 @@ public class Helper {
         for (int i = 0; i < Main.currencylist.size(); i++) {
             String zwischenspeicher = Main.currencylist.get(i).getName();
             if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
-                return test = true;
-            } else if (!zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
+                return true;
+            } else {
                 test = false;
             }
 
