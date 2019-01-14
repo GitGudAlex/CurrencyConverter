@@ -61,11 +61,13 @@ public class Rechner {
     }
 
     public static double PunktKomma (String eingabe){
-        if(eingabe.contains(".")){
-            eingabe.replace(".", ",");
+        if(eingabe.contains(",")){
+            eingabe = eingabe.replaceFirst(",", ".");
+
         }
 
-        double eingabeDouble = Double.parseDouble(eingabe);
+        System.out.println(eingabe);
+        double eingabeDouble = Double.valueOf(eingabe);
 
         return eingabeDouble;
     }
