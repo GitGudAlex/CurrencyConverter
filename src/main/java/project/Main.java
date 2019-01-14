@@ -57,12 +57,12 @@ public class Main {
             while (s.hasNext()) {
                 zwischenspeicher = s.nextLine();
                 String p[] = zwischenspeicher.split(":");
-                korrekterZahlenwert=Currency.korrekterSDRWert(p[1]);
+                korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
 
-                if(korrekterZahlenwert){
-                Currency neuesObjekt = new Currency(p[0], p[1]);
-                currencylist.add(listenNummer, neuesObjekt);
-                listenNummer++;
+                if (korrekterZahlenwert) {
+                    Currency neuesObjekt = new Currency(p[0], p[1]);
+                    currencylist.add(listenNummer, neuesObjekt);
+                    listenNummer++;
 
                 }
             }
@@ -84,16 +84,16 @@ public class Main {
 
             } else if (eingabe.equals("2")) {
 
-                if (toBuy.equals("not set") || toSell.equals("not set")){
+                if (toBuy.equals("not set") || toSell.equals("not set")) {
                     System.out.println("Please select a currency");
                 } else {
                     betragAusgewählt = true;
                     System.out.println(auswahl2);
                     eingabe = scannerEingabe.next();
-                    eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe)*100);
+                    eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
                     eingegebenerWert /= 100;
 
-                    umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy,eingegebenerWert);
+                    umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
                 }
 
 
@@ -109,50 +109,4 @@ public class Main {
         }
 
     }
-    // Methoden
-
-
-<<<<<<< HEAD
-        return test;
-    }
-
-    private static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewählt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
-        String kopfbereich = "";
-        String[] sdrWert;
-        String[] toSellAndToBuy = new String[2];
-        final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
-        final String exitStart = "Please choose an option (>>x<< to exit)";
-        final String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
-        final String select = "Select a currency by index:";
-        String eingabeAuswahl;
-
-
-        eingabeAuswahl = eingabe;
-        if (!betragAusgewählt) {
-            kopfbereich = KopfBereich.KopfbereichEins(toSell, toBuy);
-        } else if (betragAusgewählt) {
-            kopfbereich = KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag);
-        }
-
-        System.out.println(kopfbereich + "\n" + auswahlStart + "\n\n" + exitStart + "\n" + auswahl);
-
-        eingabe = scannerEingabe.next();
-
-        if (eingabeAuswahl.equals("0")&&eingabe.equals("xxx")) {
-            return toBuy;
-        } else if(!eingabeAuswahl.equals("0")&&eingabe.equals("xxx")){
-            return toSell;
-        }
-        
-
-        while (!EingabeKorrekt(eingabe)) {
-            System.out.println("currency does not exist. Please try again");
-            eingabe = scannerEingabe.next();
-        }
-=======
->>>>>>> d1a8208a8673254d6aa337f4cc8e903c3437481e
-
-
-
-
 }
