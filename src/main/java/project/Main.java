@@ -73,37 +73,43 @@ public class Main {
 
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
+        label:
         while (scannerEingabe.hasNext() || auswahlGesetzt) {
             eingabe = scannerEingabe.next();
             auswahlGesetzt = false;
 
-            if (eingabe.equals("0")) {
-                toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
-            } else if (eingabe.equals("1")) {
-                toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+            switch (eingabe) {
+                case "0":
+                    toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+                    break;
+                case "1":
+                    toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
 
-            } else if (eingabe.equals("2")) {
+                    break;
+                case "2":
 
-                if (toBuy.equals("not set") || toSell.equals("not set")) {
-                    System.out.println("Please select a currency");
-                } else {
-                    betragAusgewählt = true;
-                    System.out.println(auswahl2);
-                    eingabe = scannerEingabe.next();
-                    eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
-                    eingegebenerWert /= 100;
+                    if (toBuy.equals("not set") || toSell.equals("not set")) {
+                        System.out.println("Please select a currency");
+                    } else {
+                        betragAusgewählt = true;
+                        System.out.println(auswahl2);
+                        eingabe = scannerEingabe.next();
+                        eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
+                        eingegebenerWert /= 100;
 
-                    umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
-                }
+                        umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
+                    }
 
 
-            } else if (eingabe.equals("x")) {
+                    break;
+                case "x":
 
-                break;
+                    break label;
 
-            } else {
-                System.out.println("invalid input. Please select a currency.");
-                auswahlGesetzt = true;
+                default:
+                    System.out.println("invalid input. Please select a currency.");
+                    auswahlGesetzt = true;
+                    break;
             }
 
         }
