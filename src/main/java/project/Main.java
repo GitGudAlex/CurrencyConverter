@@ -95,7 +95,6 @@ public class Main {
                 }
 
 
-
             } else if (eingabe.equals("x")) {
 
                 break;
@@ -109,8 +108,6 @@ public class Main {
 
     }
     // Methoden
-
-
 
     /**
      * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der Eingabe des Benutzers
@@ -174,7 +171,6 @@ public class Main {
 
         eingabe = scannerEingabe.next();
 
-
         while (!EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
             eingabe = scannerEingabe.next();
@@ -203,9 +199,6 @@ public class Main {
         }
 
         for (int i = 0; i < vorschlag.length; i++){
-            int e;
-            if(!Helper.bestehtAusZahlen(eingabe,vorschlag.length)){
-                e=Integer.parseInt(eingabe);
 
                 if (eingabe.equals("" + i)) {
                     if (eingabeAuswahl.equals("0")) {
@@ -224,19 +217,8 @@ public class Main {
                         System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
                     }
 
-                }else if (!(0<=e&&e<=vorschlag.length)){
-                    System.out.println("Please choose a correct digit!");
-                    eingabe=scannerEingabe.next();
-                    i=-1;
                 }
-
-            }else{
-                System.out.println("Please choose a correct digit!");
-                eingabe=scannerEingabe.next();
-                i=-1;
-            }
-
-        }
+                }
 
         System.out.println(auswahlStart + "\n\n" + exitStart);
 
