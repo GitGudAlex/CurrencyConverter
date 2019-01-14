@@ -13,7 +13,7 @@ public class KopfBereich {
      */
     public static String KopfbereichEins(String toSell, String toBuy) {
 
-        return "Currency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
+        return "\n\n\n\nCurrency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
     }
 
@@ -29,7 +29,7 @@ public class KopfBereich {
      */
     public static String KopfbereichZwei(String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert) {
 
-        return  "Buying: " + umzurechnenderWert + " " + toBuy + "\n" +
+        return  "\n\n\n\nBuying: " + umzurechnenderWert + " " + toBuy + "\n" +
                 "Selling: " + umgerechneterWert + " " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
     }

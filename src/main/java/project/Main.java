@@ -171,7 +171,12 @@ public class Main {
 
         eingabe = scannerEingabe.next();
 
-        //if (eingabe.equals("xxx"))break; der schrott klappt nicht1
+        if (eingabeAuswahl.equals("0")&&eingabe.equals("xxx")) {
+            return toBuy;
+        } else if(!eingabeAuswahl.equals("0")&&eingabe.equals("xxx")){
+            return toSell;
+        }
+        
 
         while (!EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
