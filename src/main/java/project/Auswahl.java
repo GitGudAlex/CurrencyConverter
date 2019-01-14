@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Auswahl {
 
-    public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewählt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
+    public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewaehlt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
         String kopfbereich = "";
         String[] sdrWert;
         String[] toSellAndToBuy = new String[2];
@@ -17,9 +17,10 @@ public class Auswahl {
         Scanner scannerEingabe = new Scanner(System.in);
 
         eingabeAuswahl = eingabe;
-        if (!betragAusgewählt) {
+        if (!betragAusgewaehlt) {
             kopfbereich = KopfBereich.KopfbereichEins(toSell, toBuy);
-        } else if (betragAusgewählt) {
+
+        } else if (betragAusgewaehlt) {
             kopfbereich = KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag);
         }
 
@@ -67,9 +68,9 @@ public class Auswahl {
             }
         }
 
-        if (!betragAusgewählt) {
+        if (!betragAusgewaehlt) {
             System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
-        } else if (betragAusgewählt){
+        } else if (betragAusgewaehlt){
 
             sdrWert = Rechner.SDRWert(toSell, toBuy);
 

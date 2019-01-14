@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
+
     public static ArrayList<Currency> currencylist = new ArrayList<>();
     public static int laengeArrayAuswahl = 0;
     public static Scanner scannerEingabe = new Scanner(System.in);
@@ -28,20 +30,10 @@ public class Main {
         String toBuy = "not set";
         String toSell = "not set";
         String eingabe;
-        String zwischenspeicherLänder = "";
         String zwischenspeicher;
-
-        // konstante Strings
-
-        // String Array
-
-        String[] sdrWert;
 
         // Integervariablen
         int listenNummer = 0;
-
-        // boolean
-
 
         // Doublevariablen
         double umgerechneterBetrag = 0;
@@ -56,7 +48,7 @@ public class Main {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 zwischenspeicher = s.nextLine();
-                String p[] = zwischenspeicher.split(":");
+                String[] p = zwischenspeicher.split(":");
                 korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
 
                 if (korrekterZahlenwert) {
