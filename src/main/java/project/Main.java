@@ -100,7 +100,7 @@ public class Main {
                 break;
 
             } else {
-                System.out.println("invalid input. Please selecte a currency");
+                System.out.println("invalid input. Please select a currency.");
                 auswahlGesetzt = true;
             }
 
@@ -206,19 +206,19 @@ public class Main {
                     } else if (eingabeAuswahl.equals("1")) {
                         toSell = vorschlag[i];
                     }
-                    if (!betragAusgewählt) {
-                        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
-                    } else if (betragAusgewählt) {
-
-                        sdrWert = Rechner.SDRWert(toSell, toBuy);
-
-                        umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
-
-                        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
-                    }
-
                 }
-                }
+        }
+
+        if (!betragAusgewählt) {
+            System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
+        } else if (betragAusgewählt){
+
+            sdrWert = Rechner.SDRWert(toSell, toBuy);
+
+            umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+
+            System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+        }
 
         System.out.println(auswahlStart + "\n\n" + exitStart);
 
