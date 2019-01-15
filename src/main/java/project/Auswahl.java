@@ -58,15 +58,11 @@ public class Auswahl {
             }
 
 
-
             if (eingabeAuswahl.equals("0")) {
                 toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
             } else if (eingabeAuswahl.equals("1")) {
                 toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
             }
-
-
-
 
         }
         if (!betragAusgewaehlt) {

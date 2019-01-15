@@ -61,20 +61,26 @@ public class Rechner {
     }
 
     public static double PunktKomma (String eingabe){
-        if(eingabe.contains(",")){
-            eingabe = eingabe.replaceFirst(",", ".");
+        boolean a = true;
+        while (a == true) {
+            if (eingabe.contains(",")) {
+                eingabe = eingabe.replaceFirst(",", ".");
+                a = false;
+            }
+            try {
+                double eingabeDouble = Double.valueOf(eingabe);
 
+                return eingabeDouble;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a value.");
+                eingabe = Main.scannerEingabe.next();
+            }
         }
-        try {
-            double eingabeDouble = Double.valueOf(eingabe);
+        double eingabeDouble = Double.valueOf(eingabe);
 
-            return eingabeDouble;
+        return eingabeDouble;
 
-        } catch (NumberFormatException e){
-            System.out.println("Please enter a value.");
-        }
-             // try, catch (NumberFormatException e) sout"Please enter a value."
 
-        return 0;
     }
 }
