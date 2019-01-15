@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
+    //Test
     //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
 
     public static ArrayList<Currency> currencylist = new ArrayList<>();
