@@ -19,4 +19,9 @@ public class AuswahlTest {
 
         Assert.assertArrayEquals(expected, Auswahl.MöglichkeitenAuswahl("dol"));
     }
+
+    @Test
+    public void ausgewaehlt () {
+
+    }
 }
