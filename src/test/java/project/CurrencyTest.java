@@ -41,5 +41,15 @@ public class CurrencyTest {
 
     @Test
     public void korrekterSDRWert() {
+        String [] Euro = {"1.273760"};
+        String [] USDollar = {"1.349170"};
+        String [] ColumbianPeso = {"4,017.050000"};
+        String [] IranianRial = {"43.725.000000"};
+        String [] KoreanWon = {"1.555.180000"};
+        Assert.assertEquals(true, Currency.korrekterSDRWert(Euro [0]));
+        Assert.assertEquals(true, Currency.korrekterSDRWert(USDollar[0]));
+        Assert.assertEquals(false, Currency.korrekterSDRWert(ColumbianPeso[0]));
+        Assert.assertEquals(false, Currency.korrekterSDRWert(IranianRial[0]));
+        Assert.assertEquals(false, Currency.korrekterSDRWert(KoreanWon[0]));
     }
 }
