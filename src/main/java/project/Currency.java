@@ -22,8 +22,8 @@ public class Currency {
         return this.name = name;
     }
 
-    public void setRate(String rate) {
-        this.rate = rate;
+    public String setRate(String rate) {
+        return this.rate = rate;
     }
 
     public static boolean korrekterSDRWert(String currency){
