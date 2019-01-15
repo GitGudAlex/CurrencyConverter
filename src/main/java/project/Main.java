@@ -30,38 +30,15 @@ public class Main {
         String toBuy = "not set";
         String toSell = "not set";
         String eingabe;
-        String zwischenspeicher;
 
-        // Integervariablen
-        int listenNummer = 0;
 
         // Doublevariablen
         double umgerechneterBetrag = 0;
         double eingegebenerWert = 0;
 
-        // Dateifile der Datei currencies.csv, die die SDR Werte enthält
-        File file = new File("currencies.csv");
 
+        currencyListeFüllen();
 
-        try {
-            // Deklaration Scanner zur Abfrage der Benutzereingabe um eine Auswahl zu treffen
-            Scanner s = new Scanner(file);
-            while (s.hasNext()) {
-                zwischenspeicher = s.nextLine();
-                String[] p = zwischenspeicher.split(":");
-                korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
-
-                if (korrekterZahlenwert) {
-                    Currency neuesObjekt = new Currency(p[0], p[1]);
-                    currencylist.add(listenNummer, neuesObjekt);
-                    listenNummer++;
-
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Datei nicht gefunden");
-            e.printStackTrace();
-        }
 
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
@@ -106,5 +83,36 @@ public class Main {
 
         }
 
+    }
+
+    public static void currencyListeFüllen (){
+        String zwischenspeicher;
+
+        // Integervariablen
+        int listenNummer = 0;
+
+        // Dateifile der Datei currencies.csv, die die SDR Werte enthält
+        File file = new File("currencies.csv");
+
+
+        try {
+            // Deklaration Scanner zur Abfrage der Benutzereingabe um eine Auswahl zu treffen
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                zwischenspeicher = s.nextLine();
+                String[] p = zwischenspeicher.split(":");
+                korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
+
+                if (korrekterZahlenwert) {
+                    Currency neuesObjekt = new Currency(p[0], p[1]);
+                    currencylist.add(listenNummer, neuesObjekt);
+                    listenNummer++;
+
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Datei nicht gefunden");
+            e.printStackTrace();
+        }
     }
 }

@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Auswahl {
 
+    public static boolean a=true;
+
     public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewaehlt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
         String kopfbereich = "";
         String[] sdrWert;
@@ -28,7 +30,6 @@ public class Auswahl {
 
         eingabe = scannerEingabe.next();
 
-        //if (eingabe.equals("xxx"))break; der schrott klappt nicht1
 
         while (!Helper.EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
@@ -57,17 +58,11 @@ public class Auswahl {
             eingabe = "0";
         }
 
-        for (int i = 0; i < vorschlag.length; i++){
-
-            if (eingabe.equals("" + i)) {
-                if (eingabeAuswahl.equals("0")) {
-                    toBuy = vorschlag[i];
-                } else if (eingabeAuswahl.equals("1")) {
-                    toSell = vorschlag[i];
-                }
-            }
+        if(eingabeAuswahl.equals("0")) {
+            toBuy = ausgewaehlt(eingabe, vorschlag);
+        } else if(eingabeAuswahl.equals("1")){
+            toSell = ausgewaehlt(eingabe, vorschlag);
         }
-
         if (!betragAusgewaehlt) {
             System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
         } else if (betragAusgewaehlt){
@@ -110,5 +105,20 @@ public class Auswahl {
         }
         Main.laengeArrayAuswahl = zaehler;
         return vorschlag;
+    }
+
+    public static String ausgewaehlt (String eingabe, String [] vorschlag){
+        for (int i = 0; i < vorschlag.length; i++){
+
+            if (eingabe.equals("" + i)) {
+               return vorschlag[i];
+            }
+        }
+        if (eingabe.equals("xxx")){
+            a = false;
+            return "not set";
+        }
+
+        return "not set";
     }
 }

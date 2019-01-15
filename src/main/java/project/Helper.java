@@ -13,18 +13,16 @@ public class Helper {
 
     }
     public static boolean EingabeKorrekt(String eingabe) {
-        boolean test = true;
+        boolean test=true;
 
         for (int i = 0; i < Main.currencylist.size(); i++) {
             String zwischenspeicher = Main.currencylist.get(i).getName();
             if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
                 return true;
             } else {
-                test = false;
+                test=false;
             }
-
         }
-
         return test;
     }
 }
