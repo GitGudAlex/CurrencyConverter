@@ -17,5 +17,9 @@ public class KopfBereichTest {
 
     @Test
     public void kopfbereichZwei() {
+        String EuroUSDollar = "\n\n\n\nBuying: 3.5 Euro\nSelling: 3.71 U.S. dollar\n++++++++++++++++++++++++++++++++++";
+        String MexicanPesoNepaleseRupee = "\n\n\n\nBuying: 5.0 Mexican peso\nSelling: 27.33 Nepalese rupee\n++++++++++++++++++++++++++++++++++";
+        Assert.assertEquals(EuroUSDollar, KopfBereich.KopfbereichZwei("U.S. dollar", "Euro", 3.5, 3.71));
+        Assert.assertEquals(MexicanPesoNepaleseRupee, KopfBereich.KopfbereichZwei("Nepalese rupee", "Mexican peso", 5.0, 27.33));
     }
 }
