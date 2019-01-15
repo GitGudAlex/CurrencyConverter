@@ -15,6 +15,10 @@ public class Helper {
     public static boolean EingabeKorrekt(String eingabe) {
         boolean test=true;
 
+        if (eingabe.equals("xxx")){
+            return true;
+        }
+
         for (int i = 0; i < Main.currencylist.size(); i++) {
             String zwischenspeicher = Main.currencylist.get(i).getName();
             if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {

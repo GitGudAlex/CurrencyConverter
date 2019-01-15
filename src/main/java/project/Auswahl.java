@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Auswahl {
 
-    public static boolean a=true;
 
     public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewaehlt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
         String kopfbereich = "";
@@ -36,32 +35,34 @@ public class Auswahl {
             eingabe = scannerEingabe.next();
         }
 
+        if (!eingabe.equals("xxx")) {
+            MöglichkeitenAuswahl(eingabe);
+            String[] vorschlag = new String[Main.laengeArrayAuswahl];
 
-        MöglichkeitenAuswahl(eingabe);
-        String[] vorschlag = new String[Main.laengeArrayAuswahl];
 
+            if (vorschlag.length > 1) {
+                System.out.println(kopfbereich);
+                for (int i = 0; i < vorschlag.length; i++) {
+                    vorschlag[i] = MöglichkeitenAuswahl(eingabe)[i];
 
-        if (vorschlag.length>1) {
-            System.out.println(kopfbereich);
-            for (int i = 0; i < vorschlag.length; i++) {
-                vorschlag[i] = MöglichkeitenAuswahl(eingabe)[i];
+                    System.out.println(i + ":" + vorschlag[i]);
+                }
 
-                System.out.println(i + ":" + vorschlag[i]);
+                System.out.println("\n" + select);
+
+                eingabe = scannerEingabe.next();
+
+            } else {
+                vorschlag[0] = MöglichkeitenAuswahl(eingabe)[0];
+                eingabe = "0";
             }
 
-            System.out.println("\n" + select);
 
-            eingabe = scannerEingabe.next();
 
-        } else {
-            vorschlag [0] = MöglichkeitenAuswahl(eingabe)[0];
-            eingabe = "0";
-        }
 
-        if(eingabeAuswahl.equals("0")) {
-            toBuy = ausgewaehlt(eingabe, vorschlag);
-        } else if(eingabeAuswahl.equals("1")){
-            toSell = ausgewaehlt(eingabe, vorschlag);
+
+
+
         }
         if (!betragAusgewaehlt) {
             System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
@@ -91,6 +92,7 @@ public class Auswahl {
      * @return Array vorschlag, der die Auswahl der Länder enthält
      */
     public static String[] MöglichkeitenAuswahl(String eingabe) {
+
         int zaehler = 0;
         String[] vorschlag = new String[Main.currencylist.size()];
         for (int i = 0; i < vorschlag.length; i++) {
@@ -107,15 +109,19 @@ public class Auswahl {
         return vorschlag;
     }
 
-    public static String ausgewaehlt (String eingabe, String [] vorschlag){
+    public static String ausgewaehlt (String eingabe, String [] vorschlag, String eingabeAuswahl){
+        String [] s = new String [2];
         for (int i = 0; i < vorschlag.length; i++){
 
             if (eingabe.equals("" + i)) {
-               return vorschlag[i];
+                if (eingabeAuswahl.equals("0")) {
+                    return s[0] = vorschlag[i];
+                } else if (eingabeAuswahl.equals("1")) {
+                    return s[1] = vorschlag[i];
+                }
             }
         }
         if (eingabe.equals("xxx")){
-            a = false;
             return "not set";
         }
 
