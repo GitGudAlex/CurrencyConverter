@@ -65,9 +65,16 @@ public class Rechner {
             eingabe = eingabe.replaceFirst(",", ".");
 
         }
-             // try, catch (NumberFormatException e) sout"Please enter a value."
+        try {
             double eingabeDouble = Double.valueOf(eingabe);
 
             return eingabeDouble;
+
+        } catch (NumberFormatException e){
+            System.out.println("Please enter a value.");
         }
+             // try, catch (NumberFormatException e) sout"Please enter a value."
+
+        return 0;
+    }
 }
