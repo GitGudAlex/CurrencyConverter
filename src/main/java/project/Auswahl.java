@@ -59,6 +59,11 @@ public class Auswahl {
 
 
 
+            if (eingabeAuswahl.equals("0")) {
+                toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
+            } else if (eingabeAuswahl.equals("1")) {
+                toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
+            }
 
 
 
@@ -109,20 +114,20 @@ public class Auswahl {
         return vorschlag;
     }
 
-    public static String ausgewaehlt (String eingabe, String [] vorschlag, String eingabeAuswahl){
+    public static String ausgewaehlt (String eingabe, String [] vorschlag, String eingabeAuswahl, String toSell, String toBuy){
         String [] s = new String [2];
         for (int i = 0; i < vorschlag.length; i++){
 
             if (eingabe.equals("" + i)) {
-                if (eingabeAuswahl.equals("0")) {
-                    return s[0] = vorschlag[i];
-                } else if (eingabeAuswahl.equals("1")) {
-                    return s[1] = vorschlag[i];
-                }
+                return vorschlag[i];
             }
         }
         if (eingabe.equals("xxx")){
-            return "not set";
+            if(eingabeAuswahl.equals("0")){
+                return toBuy;
+            } else if (eingabeAuswahl.equals("1")){
+                return toSell;
+            }
         }
 
         return "not set";
