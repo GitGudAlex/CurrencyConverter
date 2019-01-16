@@ -11,6 +11,8 @@ public class AuswahlTest {
 
     @Test
     public void laenderauswahl() {
+       Main.currencyListeFüllen();
+       Assert.assertEquals("", Auswahl.Laenderauswahl("not set", "not set", false, 0,0,"0"));
     }
 
     @Test

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     //Test
+    // Folgende UnitTests fehlen noch: Länderauswahl, Main auch?
     //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
 
     public static ArrayList<Currency> currencylist = new ArrayList<>();

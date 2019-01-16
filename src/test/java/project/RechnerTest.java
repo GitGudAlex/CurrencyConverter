@@ -6,7 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RechnerTest {
-
+    /**
+     * Unit Test: Methode Umrechner
+     */
     @Test
     public void umrechner() {
         String EuroMexicanPeso [] = {"26.381300", "1.273760"};
