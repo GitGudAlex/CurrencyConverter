@@ -28,12 +28,22 @@ public class RechnerTest {
 
     @Test
     public void SDRWert() {
-        //Assert.assertArrayEquals(new String[]{"1.273760", "1.349170"}, Rechner.SDRWert("U.S. dollar", "Euro"));
+        Main.currencyListeFüllen();
+        Assert.assertArrayEquals(new String[]{"1.349170", "1.273760"}, Rechner.SDRWert("U.S. dollar", "Euro"));
+        Assert.assertArrayEquals(new String[]{"38.080200", "1.362120"}, Rechner.SDRWert("Uruguayan peso", "Swiss franc"));
+        Assert.assertArrayEquals(new String[]{"1.920520", "26.381300"}, Rechner.SDRWert("New Zealand dollar", "Mexican peso"));
+        Assert.assertArrayEquals(new String[]{"14.024600", "1.273760"}, Rechner.SDRWert("Botswana pula", "Euro"));
+        Assert.assertArrayEquals(new String[]{"1.349170", "14.024600"}, Rechner.SDRWert("U.S. dollar", "Botswana pula"));
     }
 
     @Test
     public void blockZwei() {
-        //Assert.assertEquals(5.3 , Rechner.BlockZwei("U.S. dollar", "Euro", 5.0), 1e-15);
+        Main.currencyListeFüllen();
+        Assert.assertEquals(5.3 , Rechner.BlockZwei("U.S. dollar", "Euro", 5.0), 1e-15);
+        Assert.assertEquals(67.1 , Rechner.BlockZwei("Mexican peso", "Canadian dollar", 4.6), 1e-15);
+        Assert.assertEquals(8924.62 , Rechner.BlockZwei("Uruguayan peso", "Kazakhstani tenge", 100000.0), 1e-15);
+        Assert.assertEquals(5.0 , Rechner.BlockZwei("Kazakhstani tenge", "Kazakhstani tenge", 5.0), 1e-15);
+        Assert.assertEquals(19.49 , Rechner.BlockZwei("Malaysian ringgit", "Australian dollar", 5.78), 1e-15);
     }
 
     @Test

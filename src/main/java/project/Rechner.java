@@ -83,4 +83,10 @@ public class Rechner {
 
 
     }
+
+    public static double GroßeZahlenRunden (double umgerechneterBetrag){
+        if (umgerechneterBetrag >= 10000000) {
+        }
+        return umgerechneterBetrag;
+    }
 }

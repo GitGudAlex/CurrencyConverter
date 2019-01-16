@@ -65,6 +65,7 @@ public class Main {
                         eingabe = scannerEingabe.next();
                         eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
                         eingegebenerWert /= 100;
+                        eingegebenerWert = Math.abs(eingegebenerWert);
 
                         umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
                     }
