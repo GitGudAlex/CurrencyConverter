@@ -9,6 +9,8 @@ public class Main {
     //Test
     // Folgende UnitTests fehlen noch: Länderauswahl, Main auch?
     //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
+    //Nach falscher Eingabe bei Laender Auswahl -> Programm springt an Anfang
+    //Bei zweitem Durchlauf obiger Fehler = NullPointerException
 
 
     //Variablendeklaration public
