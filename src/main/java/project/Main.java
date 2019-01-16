@@ -60,14 +60,24 @@ public class Main {
                     if (toBuy.equals("not set") || toSell.equals("not set")) {
                         System.out.println("Please select a currency");
                     } else {
-                        betragAusgewählt = true;
+
                         System.out.println(auswahl2);
                         eingabe = scannerEingabe.next();
-                        eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
-                        eingegebenerWert /= 100;
-                        eingegebenerWert = Math.abs(eingegebenerWert);
 
-                        umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
+
+                             do {
+                                 betragAusgewählt = true;
+                                 eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
+                                 eingegebenerWert /= 100;
+                                 if (eingegebenerWert < 0) {
+                                     betragAusgewählt = false;
+                                     System.out.println("please enter a positiv amount");
+                                     eingabe = scannerEingabe.next();
+                                 }
+                             }while(betragAusgewählt==false);
+
+                            umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
+
                     }
 
 

@@ -53,10 +53,11 @@ public class Rechner {
 
     public static double BlockZwei (String toSell, String toBuy, double eingegebenerWert){
 
-        String [] sdrWert = Rechner.SDRWert(toSell, toBuy);
-        double umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+            String[] sdrWert = Rechner.SDRWert(toSell, toBuy);
+            double umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
-        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + Main.auswahlStart + "\n\n" + Main.exitStart);
+            System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + Main.auswahlStart + "\n\n" + Main.exitStart);
+
         return umgerechneterBetrag;
     }
 
@@ -86,6 +87,8 @@ public class Rechner {
 
     public static double GroßeZahlenRunden (double umgerechneterBetrag){
         if (umgerechneterBetrag >= 10000000) {
+
+
         }
         return umgerechneterBetrag;
     }
