@@ -10,6 +10,8 @@ public class Main {
     // Folgende UnitTests fehlen noch: Länderauswahl, Main auch?
     //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
 
+
+    //Variablendeklaration public
     public static ArrayList<Currency> currencylist = new ArrayList<>();
     public static int laengeArrayAuswahl = 0;
     public static Scanner scannerEingabe = new Scanner(System.in);
@@ -32,14 +34,12 @@ public class Main {
         String toSell = "not set";
         String eingabe;
 
-
         // Doublevariablen
         double umgerechneterBetrag = 0;
         double eingegebenerWert = 0;
 
-
+        //ArrayList currencylist wird mit Daten aus anderer Datei gefüllt
         currencyListeFüllen();
-
 
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
@@ -47,50 +47,52 @@ public class Main {
         while (scannerEingabe.hasNext() || auswahlGesetzt) {
             eingabe = scannerEingabe.next();
             auswahlGesetzt = false;
+            try {
+                switch (eingabe) {
+                    case "0":
+                        toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+                        break;
+                    case "1":
+                        toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
 
-            switch (eingabe) {
-                case "0":
-                    toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
-                    break;
-                case "1":
-                    toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+                        break;
+                    case "2":
 
-                    break;
-                case "2":
+                        if (toBuy.equals("not set") || toSell.equals("not set")) {
+                            System.out.println("Please select a currency");
+                        } else {
 
-                    if (toBuy.equals("not set") || toSell.equals("not set")) {
-                        System.out.println("Please select a currency");
-                    } else {
+                            System.out.println(auswahl2);
+                            eingabe = scannerEingabe.next();
 
-                        System.out.println(auswahl2);
-                        eingabe = scannerEingabe.next();
-
-
-                             do {
-                                 betragAusgewählt = true;
-                                 eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
-                                 eingegebenerWert /= 100;
-                                 if (eingegebenerWert < 0) {
-                                     betragAusgewählt = false;
-                                     System.out.println("please enter a positiv amount");
-                                     eingabe = scannerEingabe.next();
-                                 }
-                             }while(betragAusgewählt==false);
+                            do {
+                                betragAusgewählt = true;
+                                eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
+                                eingegebenerWert /= 100;
+                                if (eingegebenerWert < 0) {
+                                    betragAusgewählt = false;
+                                    System.out.println("please enter a positiv amount");
+                                    eingabe = scannerEingabe.next();
+                                }
+                            } while (betragAusgewählt == false);
 
                             umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
 
-                    }
+                        }
 
 
-                    break;
-                case "x":
+                        break;
+                    case "x":
 
-                    break label;
+                        break label;
 
-                default:
-                    System.out.println("invalid input. Please select a currency.");
-                    auswahlGesetzt = true;
-                    break;
+                    default:
+                        System.out.println("invalid input. Please select a currency.");
+                        auswahlGesetzt = true;
+                        break;
+                }
+            }catch (NullPointerException e){
+                System.out.println("Wrong input.");
             }
 
         }
