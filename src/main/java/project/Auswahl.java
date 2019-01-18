@@ -8,6 +8,8 @@ public class Auswahl {
     public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewaehlt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
         String kopfbereich = "";
         String[] sdrWert;
+        boolean susi = false;
+        int alex = 0;
 
         final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         final String exitStart = "Please choose an option (>>x<< to exit)";
@@ -39,12 +41,11 @@ public class Auswahl {
             MöglichkeitenAuswahl(eingabe);
             String[] vorschlag = new String[Main.laengeArrayAuswahl];
 
-
             if (vorschlag.length > 1) {
                 System.out.println(kopfbereich);
                 for (int i = 0; i < vorschlag.length; i++) {
                     vorschlag[i] = MöglichkeitenAuswahl(eingabe)[i];
-
+                    alex = i;
                     System.out.println(i + ":" + vorschlag[i]);
                 }
 
@@ -57,34 +58,47 @@ public class Auswahl {
                 eingabe = "0";
             }
 
+            while (!susi) {
+                if (eingabeAuswahl.equals("0")) {
+                    toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
+                } else if (eingabeAuswahl.equals("1")) {
+                    toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
+                }
+               /* int a = Integer.valueOf(eingabe);
+                if (!(0 <= a || a < alex)) {
+                    susi = false;
+                    System.out.println("while");
+                }*/
 
-            if (eingabeAuswahl.equals("0")) {
-                toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
-            } else if (eingabeAuswahl.equals("1")) {
-                toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
+                try {
+                    if (!betragAusgewaehlt) {
+                        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
+
+                    } else if (betragAusgewaehlt) {
+
+                        sdrWert = Rechner.SDRWert(toSell, toBuy);
+
+                        umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+
+                        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+                    }
+                    susi=true;
+                } catch (NullPointerException e) {
+                    susi = false;
+                    System.out.println("ashdbasajsfasfasföa");
+                    eingabe = scannerEingabe.next();
+
+                }
             }
-
+        }
+            System.out.println(auswahlStart + "\n\n" + exitStart);
+            if (eingabeAuswahl.equals("0")) {
+                return toBuy;
+            } else {
+                return toSell;
+            }
         }
 
-        if (!betragAusgewaehlt) {
-            System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
-        } else if (betragAusgewaehlt){
-
-            sdrWert = Rechner.SDRWert(toSell, toBuy);
-
-            umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
-
-            System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
-        }
-
-        System.out.println(auswahlStart + "\n\n" + exitStart);
-
-        if (eingabeAuswahl.equals("0")) {
-            return toBuy;
-        } else {
-            return toSell;
-        }
-    }
 
     /**
      * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der Eingabe des Benutzers

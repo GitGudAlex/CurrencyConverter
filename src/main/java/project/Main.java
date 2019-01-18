@@ -48,7 +48,7 @@ public class Main {
         while (scannerEingabe.hasNext() || !auswahlGesetzt) {
             eingabe = scannerEingabe.next();
             auswahlGesetzt = true;
-            try {
+
                 switch (eingabe) {
 
                     case "0":
@@ -92,13 +92,9 @@ public class Main {
                         break;
                 }
 
-            }catch (NullPointerException e){
-                System.out.println("Wrong input.");
              }
 
         }
-
-    }
 
     /**
      * Füllt die currency-Liste
