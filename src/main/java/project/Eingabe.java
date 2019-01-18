@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Eingabe {
 
-    static Scanner eingabe = new Scanner(System.in);
-
     public static String getEingabe(){
+        Scanner eingabe = new Scanner(System.in);
         return eingabe.next();
     }
 
     public static boolean EingabeHasNext(){
+        Scanner eingabe = new Scanner(System.in);
         if (eingabe.hasNext()){
             return true;
         }else {
