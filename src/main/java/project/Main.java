@@ -10,7 +10,6 @@ public class Main {
     // Folgende UnitTests fehlen noch: Länderauswahl, Main auch?
     //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
     //Nach falscher Eingabe bei Laender Auswahl -> Programm springt an Anfang
-    //Bei zweitem Durchlauf obiger Fehler = NullPointerException
 
 
     //Variablendeklaration public
@@ -49,17 +48,17 @@ public class Main {
         while (scannerEingabe.hasNext() || auswahlGesetzt) {
             eingabe = scannerEingabe.next();
             auswahlGesetzt = false;
-            try {
+
                 switch (eingabe) {
                     case "0":
                         toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
                         break;
+
                     case "1":
                         toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
-
                         break;
-                    case "2":
 
+                    case "2":
                         if (toBuy.equals("not set") || toSell.equals("not set")) {
                             System.out.println("Please select a currency");
                         } else {
@@ -73,15 +72,14 @@ public class Main {
                                 eingegebenerWert /= 100;
                                 if (eingegebenerWert < 0) {
                                     betragAusgewählt = false;
-                                    System.out.println("please enter a positiv amount");
+                                    System.out.println("Please enter a positive amount");
                                     eingabe = scannerEingabe.next();
                                 }
-                            } while (betragAusgewählt == false);
+                            } while (!betragAusgewählt);
 
                             umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
 
                         }
-
 
                         break;
                     case "x":
@@ -93,12 +91,7 @@ public class Main {
                         auswahlGesetzt = true;
                         break;
                 }
-            }catch (NullPointerException e){
-                System.out.println("Wrong input.");
-            }
-
         }
-
     }
 
     public static void currencyListeFüllen (){

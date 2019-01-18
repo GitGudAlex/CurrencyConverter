@@ -39,7 +39,6 @@ public class Auswahl {
             MöglichkeitenAuswahl(eingabe);
             String[] vorschlag = new String[Main.laengeArrayAuswahl];
 
-
             if (vorschlag.length > 1) {
                 System.out.println(kopfbereich);
                 for (int i = 0; i < vorschlag.length; i++) {
@@ -49,14 +48,12 @@ public class Auswahl {
                 }
 
                 System.out.println("\n" + select);
-
                 eingabe = scannerEingabe.next();
 
-            } else {
+            }else{
                 vorschlag[0] = MöglichkeitenAuswahl(eingabe)[0];
                 eingabe = "0";
             }
-
 
             if (eingabeAuswahl.equals("0")) {
                 toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
@@ -65,15 +62,19 @@ public class Auswahl {
             }
 
         }
-        if (!betragAusgewaehlt) {
-            System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
-        } else if (betragAusgewaehlt){
+        try {
+            if (!betragAusgewaehlt) {
+                System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
+            } else if (betragAusgewaehlt) {
 
-            sdrWert = Rechner.SDRWert(toSell, toBuy);
+                sdrWert = Rechner.SDRWert(toSell, toBuy);
 
-            umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+                umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
-            System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+                System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+            }
+        }catch (NullPointerException e){
+            System.out.println("Wrong input detected. Please try again.\n\n\n");
         }
 
         System.out.println(auswahlStart + "\n\n" + exitStart);
@@ -94,20 +95,19 @@ public class Auswahl {
      */
     public static String[] MöglichkeitenAuswahl(String eingabe) {
 
-        int zaehler = 0;
-        String[] vorschlag = new String[Main.currencylist.size()];
-        for (int i = 0; i < vorschlag.length; i++) {
-            String zwischenspeicher = Main.currencylist.get(i).getName();
-            String ausgabe = zwischenspeicher;
-            if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
-                vorschlag[zaehler] = ausgabe;
+                int zaehler = 0;
+                String[] vorschlag = new String[Main.currencylist.size()];
+                for (int i = 0; i < vorschlag.length; i++) {
+                    String zwischenspeicher = Main.currencylist.get(i).getName();
+                    String ausgabe = zwischenspeicher;
+                    if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
+                        vorschlag[zaehler] = ausgabe;
 
-                zaehler++;
-            }
-
-        }
-        Main.laengeArrayAuswahl = zaehler;
-        return vorschlag;
+                        zaehler++;
+                    }
+                }
+                Main.laengeArrayAuswahl = zaehler;
+                return vorschlag;
     }
 
     public static String ausgewaehlt (String eingabe, String [] vorschlag, String eingabeAuswahl, String toSell, String toBuy){
@@ -117,7 +117,8 @@ public class Auswahl {
             if (eingabe.equals("" + i)) {
                 return vorschlag[i];
             }
-        }
+                }
+
         if (eingabe.equals("xxx")){
             if(eingabeAuswahl.equals("0")){
                 return toBuy;
