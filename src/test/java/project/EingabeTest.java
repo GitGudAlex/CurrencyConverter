@@ -18,16 +18,20 @@ public class EingabeTest {
 
     @Test
     public void getEingabe(){
+        String inputZwei = "2";
         String inputEins = "1";
+        String inputNull = "0";
+
+        InputStream inZwei = new ByteArrayInputStream(inputZwei.getBytes());
         InputStream inEins = new ByteArrayInputStream(inputEins.getBytes());
+        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
+
+        System.setIn(inZwei);
+        Assert.assertEquals("2", Eingabe.getEingabe());
+
         System.setIn(inEins);
         Assert.assertEquals("1", Eingabe.getEingabe());
-    }
 
-    @Test
-    public void getEingabeEins(){
-        String inputNull = "0";
-        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
         System.setIn(inNull);
         Assert.assertEquals("0", Eingabe.getEingabe());
     }
