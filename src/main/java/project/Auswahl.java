@@ -27,7 +27,7 @@ public class Auswahl {
 
         System.out.println(kopfbereich + "\n" + auswahlStart + "\n\n" + exitStart + "\n" + auswahl);
 
-        eingabe = scannerEingabe.next();
+        eingabe = Eingabe.getEingabe();
 
 
         while (!Helper.EingabeKorrekt(eingabe)) {
@@ -50,7 +50,7 @@ public class Auswahl {
 
                 System.out.println("\n" + select);
 
-                eingabe = scannerEingabe.next();
+                eingabe = Eingabe.getEingabe();
 
             } else {
                 vorschlag[0] = MöglichkeitenAuswahl(eingabe)[0];

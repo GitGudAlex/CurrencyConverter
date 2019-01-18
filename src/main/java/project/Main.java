@@ -16,7 +16,6 @@ public class Main {
     //Variablendeklaration public
     public static ArrayList<Currency> currencylist = new ArrayList<>();
     public static int laengeArrayAuswahl = 0;
-    public static Scanner scannerEingabe = new Scanner(System.in);
 
     public static final String exitStart = "Please choose an option (>>x<< to exit)";
     public static final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
@@ -45,8 +44,8 @@ public class Main {
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
         label:
-        while (scannerEingabe.hasNext() || !auswahlGesetzt) {
-            eingabe = scannerEingabe.next();
+        while (Eingabe.EingabeHasNext() || !auswahlGesetzt) {
+            eingabe = Eingabe.getEingabe();
             auswahlGesetzt = true;
             try {
                 switch (eingabe) {
@@ -66,7 +65,7 @@ public class Main {
                             System.out.println("Please select a currency");
                         } else {
                             System.out.println(auswahl2);
-                            eingabe = scannerEingabe.next();
+                            eingabe = Eingabe.getEingabe();
 
                             do {
                                 betragAusgewählt = true;
@@ -75,7 +74,7 @@ public class Main {
                                 if (eingegebenerWert < 0) {
                                     betragAusgewählt = false;
                                     System.out.println("please enter a positiv amount");
-                                    eingabe = scannerEingabe.next();
+                                    eingabe = Eingabe.getEingabe();
                                 }
                             } while (betragAusgewählt == false);
 

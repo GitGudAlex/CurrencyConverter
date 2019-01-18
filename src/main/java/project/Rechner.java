@@ -101,7 +101,7 @@ public class Rechner {
                 //Wenn eingabe nicht in double-Wert gespeichert werden kann, da eingabe keine Zahl
                 System.out.println("Please enter a value.");
                 //erneute eingabe; While-Schleife wird wiederholt
-                eingabe = Main.scannerEingabe.next();
+                eingabe = Eingabe.getEingabe();
             }
         }
         return eingabeDouble;
