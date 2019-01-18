@@ -22,15 +22,14 @@ public class Main {
     public static final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
     public static final String auswahl2 = "Enter an amount:";
 
-    public static boolean betragAusgewählt = false;
-    public static boolean auswahlGesetzt = false;
+    public static boolean betragAusgewählt = false; //gibt an ob Betrag (Auswahl 2) ausgewählt und gesetzt worden ist
+    public static boolean auswahlGesetzt = false; //gibt an ob eine Auswahl ausgewählt wurde
     public static boolean korrekterZahlenwert;
 
 
     public static void main(String[] args) {
 
         // Variablendeklaration
-
         // Strings
         String toBuy = "not set";
         String toSell = "not set";
@@ -46,24 +45,26 @@ public class Main {
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
         label:
-        while (scannerEingabe.hasNext() || auswahlGesetzt) {
+        while (scannerEingabe.hasNext() || !auswahlGesetzt) {
             eingabe = scannerEingabe.next();
-            auswahlGesetzt = false;
+            auswahlGesetzt = true;
             try {
                 switch (eingabe) {
+
                     case "0":
+                        //currency wird für to buy ausgewählt
                         toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
                         break;
+
                     case "1":
+                        //currency wird für to sell ausgewählt
                         toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
-
                         break;
-                    case "2":
 
+                    case "2":
                         if (toBuy.equals("not set") || toSell.equals("not set")) {
                             System.out.println("Please select a currency");
                         } else {
-
                             System.out.println(auswahl2);
                             eingabe = scannerEingabe.next();
 
@@ -79,28 +80,29 @@ public class Main {
                             } while (betragAusgewählt == false);
 
                             umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
-
                         }
-
-
                         break;
-                    case "x":
 
+                    case "x":
                         break label;
 
                     default:
                         System.out.println("invalid input. Please select a currency.");
-                        auswahlGesetzt = true;
+                        auswahlGesetzt = false;
                         break;
                 }
+
             }catch (NullPointerException e){
                 System.out.println("Wrong input.");
-            }
+             }
 
         }
 
     }
 
+    /**
+     * Füllt die currency-Liste
+     */
     public static void currencyListeFüllen (){
         String zwischenspeicher;
 
@@ -112,21 +114,27 @@ public class Main {
 
 
         try {
-            // Deklaration Scanner zur Abfrage der Benutzereingabe um eine Auswahl zu treffen
+            // Deklaration Scanner, der Inhalt aus Datei ließt
             Scanner s = new Scanner(file);
+
+            //wird ausgeführt, solange der Scanner in der Datei noch Inhalt findet
             while (s.hasNext()) {
                 zwischenspeicher = s.nextLine();
+                //Name der Currency wird in [0] und SDR-Wert in [1] gespeichert
                 String[] p = zwischenspeicher.split(":");
+                //Überprüfung ob Currency "korrekten" SDR-Wert hat
                 korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
-
+                //wird ausgeführt, falls Currency "korrekten" SDR-Wert hat
                 if (korrekterZahlenwert) {
+                    //neues Currency-Objekt wird erstellt
                     Currency neuesObjekt = new Currency(p[0], p[1]);
+                    //Objekt wird Currency-Liste hinzugefügt
                     currencylist.add(listenNummer, neuesObjekt);
                     listenNummer++;
-
                 }
             }
         } catch (FileNotFoundException e) {
+            //Falls keine Datei gefunden wird:
             System.out.println("Datei nicht gefunden");
             e.printStackTrace();
         }

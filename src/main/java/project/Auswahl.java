@@ -8,7 +8,7 @@ public class Auswahl {
     public static String Laenderauswahl(String toSell, String toBuy, boolean betragAusgewaehlt, double eingegebenerWert, double umgerechneterBetrag, String eingabe) {
         String kopfbereich = "";
         String[] sdrWert;
-        String[] toSellAndToBuy = new String[2];
+
         final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         final String exitStart = "Please choose an option (>>x<< to exit)";
         final String auswahl = "Enter a currency´s name or part of it (>>xxx<< to exit):";
@@ -65,6 +65,7 @@ public class Auswahl {
             }
 
         }
+
         if (!betragAusgewaehlt) {
             System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
         } else if (betragAusgewaehlt){
