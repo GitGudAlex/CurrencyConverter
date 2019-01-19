@@ -8,7 +8,7 @@ public class Rechner {
      * Dazu wird der vom Benutzer eingegebene Wert, sowie die SDR-Werte von der
      * toBuy-Währung und der toSell-Währung übergeben.
      *
-     * @param wert SDR-Werte der Währungen
+     * @param wert       SDR-Werte der Währungen
      * @param geldbetrag vom Benutzer eingegebener Betrag zum umrechnen
      * @return umgerechneterBetrag
      */
@@ -57,12 +57,13 @@ public class Rechner {
 
     /**
      * Methode zur Ausführung von Auswahl 2
+     *
      * @param toSell
      * @param toBuy
      * @param eingegebenerWert
      * @return umgerechneterBetrag
      */
-    public static double BlockZwei (String toSell, String toBuy, double eingegebenerWert){
+    public static double BlockZwei(String toSell, String toBuy, double eingegebenerWert) {
         //SDR-Werte werden berechnet
         String[] sdrWert = Rechner.SDRWert(toSell, toBuy);
         //SDR-Wert für toSell wird ausgerechnet
@@ -76,10 +77,11 @@ public class Rechner {
     /**
      * Methode die überprüft ob Punkt oder Komma eingegeben wurde. Falls komma eingegeben wurde wir dies
      * in einen Punkt umgewandelt
+     *
      * @param eingabe
      * @return eingabeDouble
      */
-    public static double PunktKomma (String eingabe){
+    public static double PunktKomma(String eingabe) {
         //Deklaration Boolean-Variable
         boolean a = true;
         double eingabeDouble = 0;
@@ -107,11 +109,4 @@ public class Rechner {
         return eingabeDouble;
     }
 
-    public static double GroßeZahlenRunden (double umgerechneterBetrag){
-        if (umgerechneterBetrag >= 10000000) {
-
-
-        }
-        return umgerechneterBetrag;
-    }
 }

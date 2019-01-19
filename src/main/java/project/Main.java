@@ -33,6 +33,7 @@ public class Main {
         String toBuy = "not set";
         String toSell = "not set";
         String eingabe;
+        boolean a = true;
 
         // Doublevariablen
         double umgerechneterBetrag = 0;
@@ -43,13 +44,12 @@ public class Main {
 
         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
 
-        label:
-        while (Eingabe.EingabeHasNext() || !auswahlGesetzt) {
+
+        while (a || !auswahlGesetzt) {
             eingabe = Eingabe.getEingabe();
             auswahlGesetzt = true;
 
                 switch (eingabe) {
-
                     case "0":
                         //currency wird für to buy ausgewählt
                         toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
@@ -83,7 +83,8 @@ public class Main {
                         break;
 
                     case "x":
-                        break label;
+                        a=false;
+                        break;
 
                     default:
                         System.out.println("invalid input. Please select a currency.");
