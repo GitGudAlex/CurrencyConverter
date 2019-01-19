@@ -23,14 +23,14 @@ public class KopfBereich {
      *
      * @param toSell             Währung des Landes
      * @param toBuy              Währung des Landes
-     * @param umzurechnenderWert eingegebener Wert des Benutzers, der umgerechnet werden soll
-     * @param umgerechneterWert
+     * @param toconvertedValue eingegebener Wert des Benutzers, der umgerechnet werden soll
+     * @param convertedValue
      * @return Ausgabe des Kopfbereichs
      */
-    public static String KopfbereichZwei(String toSell, String toBuy, double umzurechnenderWert, double umgerechneterWert) {
+    public static String KopfbereichZwei(String toSell, String toBuy, double toconvertedValue, double convertedValue) {
 
-        return  "\n\n\n\nBuying: " + umzurechnenderWert + " " + toBuy + "\n" +
-                "Selling: " + umgerechneterWert + " " + toSell +
+        return  "\n\n\n\nBuying: " + toconvertedValue + " " + toBuy + "\n" +
+                "Selling: " + convertedValue + " " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
     }
 

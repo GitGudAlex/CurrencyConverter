@@ -6,24 +6,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    //Test
-    // Folgende UnitTests fehlen noch: Länderauswahl, Main auch?
-    //Fehler bei Rechner. Wenn kein Wert eingegeben wird, sondern Buchstaben = Error NumberFormatException
-    //Nach falscher Eingabe bei Laender Auswahl -> Programm springt an Anfang
-    //Bei zweitem Durchlauf obiger Fehler = NullPointerException
-
-
-    //Variablendeklaration public
+     //Variablendeklaration public
     public static ArrayList<Currency> currencylist = new ArrayList<>();
-    public static int laengeArrayAuswahl = 0;
+    public static int lengthArraySelection = 0;
 
     public static final String exitStart = "Please choose an option (>>x<< to exit)";
-    public static final String auswahlStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
-    public static final String auswahl2 = "Enter an amount:";
+    public static final String selectionStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
+    public static final String selection2 = "Enter an amount:";
 
-    public static boolean betragAusgewählt = false; //gibt an ob Betrag (Auswahl 2) ausgewählt und gesetzt worden ist
-    public static boolean auswahlGesetzt = false; //gibt an ob eine Auswahl ausgewählt wurde
-    public static boolean korrekterZahlenwert;
+    public static boolean selectedAmount = false; //gibt an ob Betrag (Auswahl 2) ausgewählt und gesetzt worden ist
+    public static boolean selected = false; //gibt an ob eine Auswahl ausgewählt wurde
+    public static boolean correctNumber;
 
 
     public static void main(String[] args) {
@@ -32,63 +25,63 @@ public class Main {
         // Strings
         String toBuy = "not set";
         String toSell = "not set";
-        String eingabe;
-        boolean a = true;
+        String input;
+        boolean running = true;
 
         // Doublevariablen
-        double umgerechneterBetrag = 0;
-        double eingegebenerWert = 0;
+        double convertedAmount = 0;
+        double enteredAmount = 0;
 
         //ArrayList currencylist wird mit Daten aus anderer Datei gefüllt
         currencyListeFüllen();
 
-        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + auswahlStart + "\n\n\n" + exitStart);
+        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + selectionStart + "\n\n\n" + exitStart);
 
 
-        while (a || !auswahlGesetzt) {
-            eingabe = Eingabe.getEingabe();
-            auswahlGesetzt = true;
+        while (running || !selected) {
+            input = Eingabe.getEingabe();
+            selected = true;
 
-                switch (eingabe) {
+                switch (input) {
                     case "0":
                         //currency wird für to buy ausgewählt
-                        toBuy = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+                        toBuy = Auswahl.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "1":
                         //currency wird für to sell ausgewählt
-                        toSell = Auswahl.Laenderauswahl(toSell, toBuy, betragAusgewählt, eingegebenerWert, umgerechneterBetrag, eingabe);
+                        toSell = Auswahl.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "2":
                         if (toBuy.equals("not set") || toSell.equals("not set")) {
                             System.out.println("Please select a currency");
                         } else {
-                            System.out.println(auswahl2);
-                            eingabe = Eingabe.getEingabe();
+                            System.out.println(selection2);
+                            input = Eingabe.getEingabe();
 
                             do {
-                                betragAusgewählt = true;
-                                eingegebenerWert = Math.round(Rechner.PunktKomma(eingabe) * 100);
-                                eingegebenerWert /= 100;
-                                if (eingegebenerWert < 0) {
-                                    betragAusgewählt = false;
+                                selectedAmount = true;
+                                enteredAmount = Math.round(Rechner.PunktKomma(input) * 100);
+                                enteredAmount /= 100;
+                                if (enteredAmount < 0) {
+                                    selectedAmount = false;
                                     System.out.println("please enter a positiv amount");
-                                    eingabe = Eingabe.getEingabe();
+                                    input = Eingabe.getEingabe();
                                 }
-                            } while (betragAusgewählt == false);
+                            } while (selectedAmount == false);
 
-                            umgerechneterBetrag = Rechner.BlockZwei(toSell, toBuy, eingegebenerWert);
+                            convertedAmount = Rechner.BlockZwei(toSell, toBuy, enteredAmount);
                         }
                         break;
 
                     case "x":
-                        a=false;
+                        running=false;
                         break;
 
                     default:
                         System.out.println("invalid input. Please select a currency.");
-                        auswahlGesetzt = false;
+                        selected = false;
                         break;
                 }
 
@@ -100,10 +93,10 @@ public class Main {
      * Füllt die currency-Liste
      */
     public static void currencyListeFüllen (){
-        String zwischenspeicher;
+        String cache;
 
         // Integervariablen
-        int listenNummer = 0;
+        int listNumber = 0;
 
         // Dateifile der Datei currencies.csv, die die SDR Werte enthält
         File file = new File("currencies.csv");
@@ -115,18 +108,18 @@ public class Main {
 
             //wird ausgeführt, solange der Scanner in der Datei noch Inhalt findet
             while (s.hasNext()) {
-                zwischenspeicher = s.nextLine();
+                cache = s.nextLine();
                 //Name der Currency wird in [0] und SDR-Wert in [1] gespeichert
-                String[] p = zwischenspeicher.split(":");
+                String[] p = cache.split(":");
                 //Überprüfung ob Currency "korrekten" SDR-Wert hat
-                korrekterZahlenwert = Currency.korrekterSDRWert(p[1]);
+                correctNumber = Currency.korrekterSDRWert(p[1]);
                 //wird ausgeführt, falls Currency "korrekten" SDR-Wert hat
-                if (korrekterZahlenwert) {
+                if (correctNumber) {
                     //neues Currency-Objekt wird erstellt
                     Currency neuesObjekt = new Currency(p[0], p[1]);
                     //Objekt wird Currency-Liste hinzugefügt
-                    currencylist.add(listenNummer, neuesObjekt);
-                    listenNummer++;
+                    currencylist.add(listNumber, neuesObjekt);
+                    listNumber++;
                 }
             }
         } catch (FileNotFoundException e) {

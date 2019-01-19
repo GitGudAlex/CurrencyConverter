@@ -4,22 +4,22 @@ public class Helper {
 
     /**
      *
-     * @param eingabe
+     * @param input
      * @return
      */
-    public static boolean EingabeKorrekt(String eingabe) {
-        boolean test=true;
+    public static boolean EingabeKorrekt(String input) {
+        boolean test = true;
         //falls "xxx" eingegeben wurde, ist Eingabe korrekt
-        if (eingabe.equals("xxx")){
+        if (input.equals("xxx")){
             //gebe true zurück
             return true;
         }
         for (int i = 0; i < Main.currencylist.size(); i++) {
-            String zwischenspeicher = Main.currencylist.get(i).getName();
-            if (zwischenspeicher.toLowerCase().contains(eingabe.toLowerCase())) {
+            String cache = Main.currencylist.get(i).getName();
+            if (cache.toLowerCase().contains(input.toLowerCase())) {
                 return true;
             } else {
-                test=false;
+                test = false;
             }
         }
         return test;
