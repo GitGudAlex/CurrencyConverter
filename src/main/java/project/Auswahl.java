@@ -57,19 +57,20 @@ public class Auswahl {
             }
 
             while (!susi) {
+                susi=true;
                 if (eingabeAuswahl.equals("0")) {
                     toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
                 } else if (eingabeAuswahl.equals("1")) {
                     toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
                 }
-               /* int a = Integer.valueOf(eingabe);
-                if (!(0 <= a || a < alex)) {
+                int a = Integer.valueOf(eingabe);
+                if (a > alex||a<0) {
                     susi = false;
                     System.out.println("while");
-                }*/
+                }
 
                 try {
-                    if (!betragAusgewaehlt) {
+                    if (!betragAusgewaehlt&&susi) {
                         System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
 
                     } else if (betragAusgewaehlt) {
@@ -79,8 +80,11 @@ public class Auswahl {
                         umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
 
                         System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag));
+                        susi=true;
+                    }else if(!susi){
+                        eingabe=Eingabe.getEingabe();
                     }
-                    susi=true;
+
                 } catch (NullPointerException e) {
                     susi = false;
                     System.out.println("ashdbasajsfasfasföa");
