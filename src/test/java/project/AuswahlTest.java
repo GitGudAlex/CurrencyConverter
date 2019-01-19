@@ -15,7 +15,7 @@ public class AuswahlTest {
      * werden aus der Datei ausgelesen und in eine ArrayListe geschrieben.
      */
     @Before
-    public void initialisieren (){
+    public void initialize (){
         Main.currencyListeFüllen();
     }
 
@@ -28,8 +28,6 @@ public class AuswahlTest {
      public void laenderauswahl() {
 
         String inputEuro = "euro";
-        String inputDol = "dol";
-        String inputNull = "0";
 
         InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
 
@@ -43,16 +41,16 @@ public class AuswahlTest {
      */
     @Test
     public void ausgewaehlt () {
-        String [] vorschlagEuro = {"Euro"};
-        String [] vorschlagDol = {"U.S. dollar", "Australian dollar", "Brunei dollar", "Canadian dollar", "New Zealand dollar", "Singapore dollar", "Trinidadian dollar"};
-        String [] vorschlagPeso = {"Chilean peso", "Mexican peso", "Philippine peso", "Uruguayan peso"};
-        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", vorschlagEuro, "0", "not set", "not set"));
-        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", vorschlagDol, "0", "not set", "not set"));
-        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", vorschlagDol, "1", "not set", "not set"));
-        Assert.assertEquals("Australian dollar", Auswahl.ausgewaehlt("1", vorschlagDol, "0", "not set", "not set"));
-        Assert.assertEquals("Singapore dollar", Auswahl.ausgewaehlt("5", vorschlagDol, "0", "not set", "not set"));
-        Assert.assertEquals("Chilean peso", Auswahl.ausgewaehlt("0", vorschlagPeso, "0", "Euro", "U.S. dollar"));
-        Assert.assertEquals("Chilean peso", Auswahl.ausgewaehlt("0", vorschlagPeso, "1", "New Zealand dollar", "Trinidadian dollar"));
+        String [] suggestionEuro = {"Euro"};
+        String [] suggestionDol = {"U.S. dollar", "Australian dollar", "Brunei dollar", "Canadian dollar", "New Zealand dollar", "Singapore dollar", "Trinidadian dollar"};
+        String [] suggestionPeso = {"Chilean peso", "Mexican peso", "Philippine peso", "Uruguayan peso"};
+        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", suggestionEuro, "0", "not set", "not set"));
+        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", suggestionDol, "0", "not set", "not set"));
+        Assert.assertEquals("not set", Auswahl.ausgewaehlt("xxx", suggestionPeso, "1", "not set", "not set"));
+        Assert.assertEquals("Australian dollar", Auswahl.ausgewaehlt("1", suggestionDol, "0", "not set", "not set"));
+        Assert.assertEquals("Singapore dollar", Auswahl.ausgewaehlt("5", suggestionDol, "0", "not set", "not set"));
+        Assert.assertEquals("Chilean peso", Auswahl.ausgewaehlt("0", suggestionPeso, "0", "Euro", "U.S. dollar"));
+        Assert.assertEquals("Chilean peso", Auswahl.ausgewaehlt("0", suggestionPeso, "1", "New Zealand dollar", "Trinidadian dollar"));
 
     }
 }

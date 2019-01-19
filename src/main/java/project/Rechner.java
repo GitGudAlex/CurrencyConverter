@@ -29,7 +29,6 @@ public class Rechner {
 
     /**
      * Methode SDRWert: Methode zur Auslesen des SDR-Wertes für die jeweilige Währung des Landes
-     *
      * @param toSell Währung des Landes
      * @param toBuy  Währung des Landes
      * @return wert SDR-Werte der jeweiligen Währung von toSell und toBuy

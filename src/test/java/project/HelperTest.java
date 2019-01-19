@@ -12,7 +12,7 @@ public class HelperTest {
      * werden aus der Datei ausgelesen und in eine ArrayListe geschrieben.
      */
     @Before
-    public void initialisieren () {
+    public void initialize () {
         Main.currencyListeFüllen();
     }
 
