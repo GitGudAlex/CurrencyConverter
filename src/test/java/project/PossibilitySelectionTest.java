@@ -4,21 +4,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MoeglichkeitenAuswahlTest {
+public class PossibilitySelectionTest {
 
     @Before
-    public void initialisieren (){
-        Main.currencyListeFüllen();
+    public void initialize(){
+        Main.fillCurrencyList();
     }
 
     /**
-     * UnitTest der Methode MöglichkeitenAuswahl(), die bei einer input von einem vollständigen Wort oder nur einem
+     * UnitTest der Methode possibilitySelection(), die bei einer Input von einem vollständigen Wort oder nur einem
      * Teilwort eine Liste der möglichen Währungen ausgibt.
      * Testen, ob die ausgegebenen Vorschläge für z.B. dol, Eu oder euro richtig sind.
      * Testen, ob Groß- und Kleinschriebung, sowie das ganze Wort bzw. ein Teil des Wortes zum gleichen Ergebnis führen.
      */
     @Test
-    public void möglichkeitenAuswahl() {
+    public void possibilitySelection() {
 
         String [] suggestionDol = new String [Main.currencylist.size()];
         String [] suggestionEuro = new String [Main.currencylist.size()];
@@ -42,12 +42,12 @@ public class MoeglichkeitenAuswahlTest {
         suggestionNew [0] = "Israeli New Shekel";
         suggestionNew [1] = "New Zealand dollar";
 
-        Assert.assertArrayEquals(suggestionDol, Selection.MöglichkeitenAuswahl("dol"));
-        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("Eu"));
-        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("eur"));
-        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("Euro"));
-        Assert.assertArrayEquals(suggestionAu, Selection.MöglichkeitenAuswahl("au"));
-        Assert.assertArrayEquals(suggestionAu, Selection.MöglichkeitenAuswahl("Au"));
-        Assert.assertArrayEquals(suggestionNew, Selection.MöglichkeitenAuswahl("new"));
+        Assert.assertArrayEquals(suggestionDol, Selection.possibilitySelection("dol"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.possibilitySelection("Eu"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.possibilitySelection("eur"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.possibilitySelection("Euro"));
+        Assert.assertArrayEquals(suggestionAu, Selection.possibilitySelection("au"));
+        Assert.assertArrayEquals(suggestionAu, Selection.possibilitySelection("Au"));
+        Assert.assertArrayEquals(suggestionNew, Selection.possibilitySelection("new"));
     }
 }

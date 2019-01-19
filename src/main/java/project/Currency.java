@@ -54,7 +54,7 @@ public class Currency {
      * @param currency
      * @return boolean true: Werte sind echte Zahlen; false: Wert sind keine Zahlen
      */
-    public static boolean korrekterSDRWert(String currency){
+    public static boolean correctSDRValue(String currency){
         int counter=0;
 
         for(int i = 0; i<currency.length(); i++){

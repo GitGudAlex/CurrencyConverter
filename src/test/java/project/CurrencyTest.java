@@ -51,22 +51,22 @@ public class CurrencyTest {
     }
 
     /**
-     * UnitTest der Methode korrekterSDRWert, die überprüft ob es sich bei dem Zahlenwert des Arrays um
+     * UnitTest der Methode correctSDRValue, die überprüft ob es sich bei dem Zahlenwert des Arrays um
      * einen korrekt formatierten Zahlenwert handelt.
      * true, bei korrekt formatiertem Zahlenwert (###.####)
      * false, bei nicht korrekt formatiertem Zahlenwert
      */
     @Test
-    public void korrekterSDRWert() {
+    public void correctSDRValue() {
         String [] Euro = {"1.273760"};
         String [] USDollar = {"1.349170"};
         String [] ColumbianPeso = {"4,017.050000"};
         String [] IranianRial = {"43.725.000000"};
         String [] KoreanWon = {"1.555.180000"};
-        Assert.assertEquals(true, Currency.korrekterSDRWert(Euro [0]));
-        Assert.assertEquals(true, Currency.korrekterSDRWert(USDollar[0]));
-        Assert.assertEquals(false, Currency.korrekterSDRWert(ColumbianPeso[0]));
-        Assert.assertEquals(false, Currency.korrekterSDRWert(IranianRial[0]));
-        Assert.assertEquals(false, Currency.korrekterSDRWert(KoreanWon[0]));
+        Assert.assertEquals(true, Currency.correctSDRValue(Euro [0]));
+        Assert.assertEquals(true, Currency.correctSDRValue(USDollar[0]));
+        Assert.assertEquals(false, Currency.correctSDRValue(ColumbianPeso[0]));
+        Assert.assertEquals(false, Currency.correctSDRValue(IranianRial[0]));
+        Assert.assertEquals(false, Currency.correctSDRValue(KoreanWon[0]));
     }
 }

@@ -3,63 +3,63 @@ package project;
 public class Selection {
 
 
-    public static String Laenderauswahl(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
+    public static String currencySelection(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
         String header = "";
         String[] sdrValue;
         boolean running = false;
         int counter = 0;
 
-        final String selectionStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
+        final String selectionStart = "0: Select currencySelection to buy: \n1: Select currencySelection to sell: \n2: Choose amount to be converted:";
         final String exitStart = "Please choose an option (>>x<< to exit)";
-        final String selection = "Enter a currency´s name or part of it (>>xxx<< to exit):";
-        final String select = "Select a currency by index:";
+        final String selection = "Enter a currencySelection´s name or part of it (>>xxx<< to exit):";
+        final String select = "Select a currencySelection by index:";
         String inputSelection;
         inputSelection = input;
 
         if (!selectedAmount) {
-            header = Header.KopfbereichEins(toSell, toBuy);
+            header = Header.headerOne(toSell, toBuy);
 
         } else if (selectedAmount) {
-            header = Header.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount);
+            header = Header.headerTwo(toSell, toBuy, enteredAmount, convertedAmount);
         }
 
         System.out.println(header + "\n" + selectionStart + "\n\n" + exitStart + "\n" + selection);
 
-        input = project.input.getEingabe();
+        input = Input.getInput();
 
 
-        while (!Helper.EingabeKorrekt(input)) {
-            System.out.println("currency does not exist. Please try again");
-            input = project.input.getEingabe();
+        while (!Helper.correctInput(input)) {
+            System.out.println("currencySelection does not exist. Please try again");
+            input = Input.getInput();
         }
 
         if (!input.equals("xxx")) {
-            MöglichkeitenAuswahl(input);
+            possibilitySelection(input);
             String[] suggestion = new String[Main.lengthArraySelection];
 
             if (suggestion.length > 1) {
                 System.out.println(header);
                 for (int i = 0; i < suggestion.length; i++) {
-                    suggestion[i] = MöglichkeitenAuswahl(input)[i];
+                    suggestion[i] = possibilitySelection(input)[i];
                     counter = i;
                     System.out.println(i + ":" + suggestion[i]);
                 }
 
                 System.out.println("\n" + select);
 
-                input = project.input.getEingabe();
+                input = Input.getInput();
 
             } else {
-                suggestion[0] = MöglichkeitenAuswahl(input)[0];
+                suggestion[0] = possibilitySelection(input)[0];
                 input = "0";
             }
 
             while (!running) {
                 running=true;
                 if (inputSelection.equals("0")) {
-                    toBuy = ausgewaehlt(input, suggestion, inputSelection, toSell, toBuy);
+                    toBuy = selected(input, suggestion, inputSelection, toSell, toBuy);
                 } else if (inputSelection.equals("1")) {
-                    toSell = ausgewaehlt(input, suggestion, inputSelection, toSell, toBuy);
+                    toSell = selected(input, suggestion, inputSelection, toSell, toBuy);
                 }try {
 
                     int a = Integer.valueOf(input);
@@ -68,30 +68,30 @@ public class Selection {
                         System.out.println("Please enter a valid number.");
                     }
                 }catch (NumberFormatException e){
-                    System.out.println("Wrong input");
+                    System.out.println("Wrong Input");
                     running = false;
                 }
 
                 try {
                     if (!selectedAmount&&running) {
-                        System.out.println(Header.KopfbereichEins(toSell, toBuy));
+                        System.out.println(Header.headerOne(toSell, toBuy));
 
                     } else if (selectedAmount) {
 
-                        sdrValue = Rechner.SDRWert(toSell, toBuy);
+                        sdrValue = Helper.sdrValue(toSell, toBuy);
 
-                        convertedAmount = Rechner.Umrechner(sdrValue, enteredAmount);
+                        convertedAmount = Helper.converter(sdrValue, enteredAmount);
 
-                        System.out.println(Header.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount));
+                        System.out.println(Header.headerTwo(toSell, toBuy, enteredAmount, convertedAmount));
                         running=true;
                     }else if(!running){
-                        input= project.input.getEingabe();
+                        input= Input.getInput();
                     }
 
                 }catch (NullPointerException e) {
                     running = false;
                     System.out.println("ashdbasajsfasfasföa");
-                    input = project.input.getEingabe();
+                    input = Input.getInput();
 
                 }
                 }
@@ -106,13 +106,13 @@ public class Selection {
 
 
     /**
-     * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der input des Benutzers
+     * Methode possibilitySelection: Auslesen der Arrayliste, welche Währungen mit der Input des Benutzers
      * teilweise oder ganz übereinstimmen.
      *
      * @param input übergibt die Benutzereingabe
      * @return Array vorschlag, der die Selection der Länder enthält
      */
-    public static String[] MöglichkeitenAuswahl(String input) {
+    public static String[] possibilitySelection(String input) {
 
         int counter = 0;
         String[] suggestion = new String[Main.currencylist.size()];
@@ -130,7 +130,7 @@ public class Selection {
         return suggestion;
     }
 
-    public static String ausgewaehlt (String input, String [] suggestion, String inputSelection, String toSell, String toBuy){
+    public static String selected(String input, String [] suggestion, String inputSelection, String toSell, String toBuy){
 
         for (int i = 0; i < suggestion.length; i++){
 

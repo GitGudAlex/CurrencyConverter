@@ -8,14 +8,14 @@ import java.io.InputStream;
 
 
 
-public class inputTest {
+public class InputTest {
 
     /**
-     * UnitTest der Methode getEingabe(), die die nächste input des Benutzers zurückgibt.
+     * UnitTest der Methode getInput(), die die nächste Input des Benutzers zurückgibt.
      * Test findet mit festgelegter Benutzereingabe statt.
      */
     @Test
-    public void getEingabe(){
+    public void getInput(){
         String inputTwo = "2";
         String inputOne = "1";
         String inputZero = "0";
@@ -29,19 +29,19 @@ public class inputTest {
         InputStream inValue = new ByteArrayInputStream(inputValue.getBytes());
 
         System.setIn(inTwo);
-        Assert.assertEquals("2", input.getEingabe());
+        Assert.assertEquals("2", Input.getInput());
 
         System.setIn(inOne);
-        Assert.assertEquals("1", input.getEingabe());
+        Assert.assertEquals("1", Input.getInput());
 
         System.setIn(inZero);
-        Assert.assertEquals("0", input.getEingabe());
+        Assert.assertEquals("0", Input.getInput());
 
         System.setIn(inDollar);
-        Assert.assertEquals("Dollar", input.getEingabe() );
+        Assert.assertEquals("Dollar", Input.getInput() );
 
         System.setIn(inValue);
-        Assert.assertEquals("3.56", input.getEingabe());
+        Assert.assertEquals("3.56", Input.getInput());
     }
 }
 
