@@ -62,11 +62,16 @@ public class Auswahl {
                     toBuy = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
                 } else if (eingabeAuswahl.equals("1")) {
                     toSell = ausgewaehlt(eingabe, vorschlag, eingabeAuswahl, toSell, toBuy);
-                }
-                int a = Integer.valueOf(eingabe);
-                if (a > alex||a<0) {
+                }try {
+
+                    int a = Integer.valueOf(eingabe);
+                    if (a > alex || a < 0) {
+                        susi = false;
+                        System.out.println("Please enter a valid number.");
+                    }
+                }catch (NumberFormatException e){
+                    System.out.println("Wrong input");
                     susi = false;
-                    System.out.println("while");
                 }
 
                 try {
@@ -85,13 +90,13 @@ public class Auswahl {
                         eingabe=Eingabe.getEingabe();
                     }
 
-                } catch (NullPointerException e) {
+                }catch (NullPointerException e) {
                     susi = false;
                     System.out.println("ashdbasajsfasfasföa");
                     eingabe = Eingabe.getEingabe();
 
                 }
-            }
+                }
         }
             System.out.println(auswahlStart + "\n\n" + exitStart);
             if (eingabeAuswahl.equals("0")) {
