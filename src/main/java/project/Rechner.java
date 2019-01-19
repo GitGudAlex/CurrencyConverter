@@ -8,23 +8,23 @@ public class Rechner {
      * Dazu wird der vom Benutzer eingegebene Wert, sowie die SDR-Werte von der
      * toBuy-Währung und der toSell-Währung übergeben.
      *
-     * @param wert       SDR-Werte der Währungen
-     * @param geldbetrag vom Benutzer eingegebener Betrag zum umrechnen
+     * @param value       SDR-Werte der Währungen
+     * @param amount vom Benutzer eingegebener Betrag zum umrechnen
      * @return umgerechneterBetrag
      */
-    public static double Umrechner(String[] wert, double geldbetrag) {
+    public static double Umrechner(String[] value, double amount) {
         //Umwandlung des SDR-Wertes aus einem StringArray in eine Variable vom Typ double
-        Double rateBuy = Double.valueOf(wert[1]);
-        Double rateSell = Double.valueOf(wert[0]);
+        Double rateBuy = Double.valueOf(value[1]);
+        Double rateSell = Double.valueOf(value[0]);
         //Umzurechnender Geldbetrag wird durch SDR-Wert der toBuy Währung dividiert
-        double sdr = geldbetrag / rateBuy;
+        double sdr = amount / rateBuy;
         //Zwischengespeicherter SDR-Betrag wird mit SDR-Wert der toSell Währung multipliziert
-        double umgerechneterBetrag = sdr * rateSell;
+        double convertedAmount = sdr * rateSell;
         //umgerechneterBetrag wird auf 2 Nachkommastellen gerundet
-        umgerechneterBetrag = Math.round(umgerechneterBetrag * 100);
-        umgerechneterBetrag /= 100;
+        convertedAmount = Math.round(convertedAmount * 100);
+        convertedAmount /= 100;
         //umgerechneter Betrag wird zurückgegeben
-        return umgerechneterBetrag;
+        return convertedAmount;
     }
 
     /**
@@ -36,23 +36,23 @@ public class Rechner {
      */
     public static String[] SDRWert(String toSell, String toBuy) {
         //String array wird deklariert
-        String[] wert = new String[2];
+        String[] value = new String[2];
         //wird ausgeführt, solange i kleiner ist als Länge der Currency-Liste
         for (int i = 0; i < Main.currencylist.size(); i++) {
-            String zwischenspeicher = Main.currencylist.get(i).getName();
+            String cache = Main.currencylist.get(i).getName();
             //falls Name der Currency, der ausgewählten toSell-Currency entspricht
-            if (zwischenspeicher.contains(toSell)) {
+            if (cache.contains(toSell)) {
                 //zugehöriger SDR-Wert wird gespeichert
-                wert[0] = Main.currencylist.get(i).getRate();
+                value[0] = Main.currencylist.get(i).getRate();
             }
             //falls Name der Currency, der ausgewählten toBuy-Currency entspricht
-            if (zwischenspeicher.contains(toBuy)) {
+            if (cache.contains(toBuy)) {
                 //zugehöriger SDR-Wert wird gespeichert
-                wert[1] = Main.currencylist.get(i).getRate();
+                value[1] = Main.currencylist.get(i).getRate();
             }
         }
         //SDR-Wert von toBuy- und toSell-Currency wird zurückgegeben
-        return wert;
+        return value;
     }
 
     /**
@@ -60,53 +60,53 @@ public class Rechner {
      *
      * @param toSell
      * @param toBuy
-     * @param eingegebenerWert
+     * @param enteredAmount
      * @return umgerechneterBetrag
      */
-    public static double BlockZwei(String toSell, String toBuy, double eingegebenerWert) {
+    public static double BlockZwei(String toSell, String toBuy, double enteredAmount) {
         //SDR-Werte werden berechnet
         String[] sdrWert = Rechner.SDRWert(toSell, toBuy);
         //SDR-Wert für toSell wird ausgerechnet
-        double umgerechneterBetrag = Rechner.Umrechner(sdrWert, eingegebenerWert);
+        double convertedAmount = Rechner.Umrechner(sdrWert, enteredAmount);
         //Kopfbereich wird gebildet und wird zusammen mit Rest ausgegeben
-        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, eingegebenerWert, umgerechneterBetrag) + "\n" + Main.auswahlStart + "\n\n" + Main.exitStart);
+        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount) + "\n" + Main.selectionStart + "\n\n" + Main.exitStart);
         //umgerechneterBetrag wird zurückgegeben
-        return umgerechneterBetrag;
+        return convertedAmount;
     }
 
     /**
      * Methode die überprüft ob Punkt oder Komma eingegeben wurde. Falls komma eingegeben wurde wir dies
      * in einen Punkt umgewandelt
      *
-     * @param eingabe
+     * @param input
      * @return eingabeDouble
      */
-    public static double PunktKomma(String eingabe) {
+    public static double PunktKomma(String input) {
         //Deklaration Boolean-Variable
-        boolean a = true;
-        double eingabeDouble = 0;
+        boolean running = true;
+        double inputDouble = 0;
         //wird ausgeführt solange a wahr ist
-        while (a == true) {
+        while (running) {
             //wenn der eingegebene Wert ein Komma enthält
-            if (eingabe.contains(",")) {
+            if (input.contains(",")) {
                 //Komma wird durch Punkt ersetzt
-                eingabe = eingabe.replaceFirst(",", ".");
+                input = input.replaceFirst(",", ".");
                 //a wird auf false gesetzt, damit while-Schleife nicht noch einmal durchläuft
-                a = false;
+                running = false;
             }
             try {
                 //eingegener Wert wird als double gespeichert
-                eingabeDouble = Double.valueOf(eingabe);
+                inputDouble = Double.valueOf(input);
                 //eingabeDouble wird zurück gegeben
-                return eingabeDouble;
+                return inputDouble;
             } catch (NumberFormatException e) {
                 //Wenn eingabe nicht in double-Wert gespeichert werden kann, da eingabe keine Zahl
                 System.out.println("Please enter a value.");
                 //erneute eingabe; While-Schleife wird wiederholt
-                eingabe = Eingabe.getEingabe();
+                input = Eingabe.getEingabe();
             }
         }
-        return eingabeDouble;
+        return inputDouble;
     }
 
 }

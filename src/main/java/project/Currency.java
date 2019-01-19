@@ -55,7 +55,7 @@ public class Currency {
      * @return boolean true: Werte sind echte Zahlen; false: Wert sind keine Zahlen
      */
     public static boolean korrekterSDRWert(String currency){
-        int zaehler=0;
+        int counter=0;
 
         for(int i = 0; i<currency.length(); i++){
             //Überprüfung ob übergebener Currency-Wert nicht aus Ziffern oder Punkt besteht
@@ -68,8 +68,8 @@ public class Currency {
             }
             //falls mehrere Punkte in einer Zahl sind ist SDR-Wert nicht korrekt
             if (currency.substring(i,i+1).equals(".")){
-                zaehler++;
-                if(zaehler!=1){
+                counter++;
+                if(counter!=1){
                     return false;
                 }
             }
