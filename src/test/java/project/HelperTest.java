@@ -1,15 +1,19 @@
 package project;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 
 public class HelperTest {
 
+    @Before
+    public void initialisieren () {
+        Main.currencyListeFüllen();
+    }
+
     @Test
     public void eingabeKorrekt() {
-
-        Main.currencyListeFüllen();
 
         Assert.assertEquals(true, Helper.EingabeKorrekt("euro"));
         Assert.assertEquals(true, Helper.EingabeKorrekt("U.S. dollar"));

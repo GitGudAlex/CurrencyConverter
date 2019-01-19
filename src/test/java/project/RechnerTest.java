@@ -1,11 +1,17 @@
 package project;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class RechnerTest {
+    @Before
+    public void initialisieren (){
+        Main.currencyListeFüllen();
+    }
+
     /**
      * Unit Test: Methode Umrechner
      */
@@ -30,7 +36,6 @@ public class RechnerTest {
 
     @Test
     public void SDRWert() {
-        Main.currencyListeFüllen();
         Assert.assertArrayEquals(new String[]{"1.349170", "1.273760"}, Rechner.SDRWert("U.S. dollar", "Euro"));
         Assert.assertArrayEquals(new String[]{"38.080200", "1.362120"}, Rechner.SDRWert("Uruguayan peso", "Swiss franc"));
         Assert.assertArrayEquals(new String[]{"1.920520", "26.381300"}, Rechner.SDRWert("New Zealand dollar", "Mexican peso"));
@@ -40,7 +45,6 @@ public class RechnerTest {
 
     @Test
     public void blockZwei() {
-        Main.currencyListeFüllen();
         Assert.assertEquals(5.3 , Rechner.BlockZwei("U.S. dollar", "Euro", 5.0), 1e-15);
         Assert.assertEquals(67.1 , Rechner.BlockZwei("Mexican peso", "Canadian dollar", 4.6), 1e-15);
         Assert.assertEquals(8924.62 , Rechner.BlockZwei("Uruguayan peso", "Kazakhstani tenge", 100000.0), 1e-15);

@@ -1,6 +1,7 @@
 package project;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -9,30 +10,14 @@ import java.io.InputStream;
 
 public class AuswahlTest {
 
-    @Test
-    public void laenderauswahl() {
+    @Before
+    public void initialisieren (){
         Main.currencyListeFüllen();
-        String inputEuro = "euro";
-        String inputDol = "dol";
-        String inputNull = "0";
-
-        InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
-        InputStream inDol = new ByteArrayInputStream(inputDol.getBytes());
-        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
-
-        System.setIn(inEuro);
-        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("not set", "not set", false, 0,0,"0"));
-
-        System.setIn(inEuro);
-        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("U.S. dollar", "Australian dollar", false, 0,0,"1"));
-
-        System.setIn(inEuro);
-        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
     }
 
     @Test
     public void möglichkeitenAuswahl() {
-        Main.currencyListeFüllen();
+
         String [] vorschlagDol = new String [Main.currencylist.size()];
         String [] vorschlagEuro = new String [Main.currencylist.size()];
         String [] vorschlagAu = new String [Main.currencylist.size()];
@@ -63,6 +48,29 @@ public class AuswahlTest {
         Assert.assertArrayEquals(vorschlagAu, Auswahl.MöglichkeitenAuswahl("Au"));
         Assert.assertArrayEquals(vorschlagNew, Auswahl.MöglichkeitenAuswahl("new"));
     }
+
+    @Test
+    public void laenderauswahl() {
+        
+        String inputEuro = "euro";
+        String inputDol = "dol";
+        String inputNull = "0";
+
+        InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
+        InputStream inDol = new ByteArrayInputStream(inputDol.getBytes());
+        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("not set", "not set", false, 0,0,"0"));
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("U.S. dollar", "Australian dollar", false, 0,0,"1"));
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
+    }
+
+
 
     @Test
     public void ausgewaehlt () {
