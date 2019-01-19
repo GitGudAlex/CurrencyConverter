@@ -109,9 +109,10 @@ public class Helper {
     }
 
     /**
-     *
-     * @param input
-     * @return
+     * Methode die überprüft, ob es sich um eine korrekte Eingabe handelt,
+     * d.h. eine vorhandene Währung oder "xxx" zum Abbruch
+     * @param input Eingabe des Benutzers
+     * @return Boolean Eingabe korrekt (true)/ Eingabe falsch (false)
      */
     public static boolean correctInput(String input) {
         boolean test = true;
@@ -120,15 +121,16 @@ public class Helper {
             //gebe true zurück
             return true;
         }
+        //Auslesen der Currencyliste und Vergleich mit der Eingabe
         for (int i = 0; i < Main.currencylist.size(); i++) {
             String cache = Main.currencylist.get(i).getName();
-            if (cache.toLowerCase().contains(input.toLowerCase())) {
-                return true;
+            if (cache.toLowerCase().contains(input.toLowerCase())) { //Vergleich: alles in Kleinbuchstaben (Eingabe Groß- und Kleinschriebung irrelevant)
+                return true; //Wort(-teil) der Eingabe in der Currencyliste enthalten: return true
             } else {
-                test = false;
+                test = false; // Wort(-teil) der Eingabe nicht in der Currencyliste enthalten
             }
         }
-        return test;
+        return test; //return false
     }
 
 }

@@ -38,9 +38,8 @@ public class Main {
         System.out.println(Header.headerOne(toSell, toBuy) + "\n" + selectionStart + "\n\n\n" + exitStart);
 
 
-        while (running || !selected) {
+        while (running) {
             input = Input.getInput();
-            selected = true;
 
                 switch (input) {
                     case "0":
@@ -54,31 +53,35 @@ public class Main {
                         break;
 
                     case "2":
+                        //Überprüfung ob Currency ausgewählt wurde
                         if (toBuy.equals("not set") || toSell.equals("not set")) {
                             System.out.println("Please select a currency");
                         } else {
+                            //Betrag wird eingegeben
                             System.out.println(selection2);
                             input = Input.getInput();
 
                             do {
+                                //Betrag wird auf zwei Nachkommastellen gerundet
                                 selectedAmount = true;
                                 enteredAmount = Math.round(Helper.replace(input) * 100);
                                 enteredAmount /= 100;
+                                //Überprüfung ob negativer Wert
                                 if (enteredAmount < 0) {
                                     selectedAmount = false;
                                     System.out.println("please enter a positiv amount");
                                     input = Input.getInput();
                                 }
-                            } while (selectedAmount == false);
-
+                            } while (!selectedAmount);
+                            //Umrechnung des eingegebenen Betrags
                             convertedAmount = Helper.selectionTwo(toSell, toBuy, enteredAmount);
                         }
                         break;
-
+                    //Abbruch bei Eingabe von "x"
                     case "x":
                         running=false;
                         break;
-
+                    //Bei falscher Eingabe
                     default:
                         System.out.println("invalid Input. Please select a currency.");
                         selected = false;
@@ -93,6 +96,7 @@ public class Main {
      * Füllt die currency-Liste
      */
     public static void fillCurrencyList(){
+
         String cache;
 
         // Integervariablen

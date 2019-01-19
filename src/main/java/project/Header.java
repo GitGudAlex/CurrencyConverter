@@ -33,6 +33,4 @@ public class Header {
                 "Selling: " + convertedValue + " " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
     }
-
-
 }
