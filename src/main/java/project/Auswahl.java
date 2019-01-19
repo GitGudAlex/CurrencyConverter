@@ -17,8 +17,6 @@ public class Auswahl {
         final String select = "Select a currency by index:";
         String eingabeAuswahl;
 
-        Scanner scannerEingabe = new Scanner(System.in);
-
         eingabeAuswahl = eingabe;
         if (!betragAusgewaehlt) {
             kopfbereich = KopfBereich.KopfbereichEins(toSell, toBuy);
@@ -34,7 +32,7 @@ public class Auswahl {
 
         while (!Helper.EingabeKorrekt(eingabe)) {
             System.out.println("currency does not exist. Please try again");
-            eingabe = scannerEingabe.next();
+            eingabe = Eingabe.getEingabe();
         }
 
         if (!eingabe.equals("xxx")) {
@@ -86,7 +84,7 @@ public class Auswahl {
                 } catch (NullPointerException e) {
                     susi = false;
                     System.out.println("ashdbasajsfasfasföa");
-                    eingabe = scannerEingabe.next();
+                    eingabe = Eingabe.getEingabe();
 
                 }
             }

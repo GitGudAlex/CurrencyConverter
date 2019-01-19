@@ -3,16 +3,31 @@ package project;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
-import static org.junit.Assert.*;
 
 public class AuswahlTest {
 
     @Test
     public void laenderauswahl() {
-      // Main.currencyListeFüllen();
-      // Assert.assertEquals("", Auswahl.Laenderauswahl("not set", "not set", false, 0,0,"0"));
+        Main.currencyListeFüllen();
+        String inputEuro = "euro";
+        String inputDol = "dol";
+        String inputNull = "0";
+
+        InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
+        InputStream inDol = new ByteArrayInputStream(inputDol.getBytes());
+        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("not set", "not set", false, 0,0,"0"));
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("U.S. dollar", "Australian dollar", false, 0,0,"1"));
+
+        System.setIn(inEuro);
+        Assert.assertEquals("Euro", Auswahl.Laenderauswahl("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
     }
 
     @Test

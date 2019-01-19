@@ -6,25 +6,23 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import java.util.Scanner;
 
-import static org.junit.Assert.*;
 
 public class EingabeTest {
-    //IntegerAsker asker = mock(IntegerAsker.class);
-    //when(asker.ask(anyString())).thenReturn(3);
-
-
 
     @Test
     public void getEingabe(){
         String inputZwei = "2";
         String inputEins = "1";
         String inputNull = "0";
+        String inputDollar = "Dollar";
+        String inputWert = "3.56";
 
         InputStream inZwei = new ByteArrayInputStream(inputZwei.getBytes());
         InputStream inEins = new ByteArrayInputStream(inputEins.getBytes());
         InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
+        InputStream inDollar = new ByteArrayInputStream(inputDollar.getBytes());
+        InputStream inWert = new ByteArrayInputStream(inputWert.getBytes());
 
         System.setIn(inZwei);
         Assert.assertEquals("2", Eingabe.getEingabe());
@@ -34,10 +32,43 @@ public class EingabeTest {
 
         System.setIn(inNull);
         Assert.assertEquals("0", Eingabe.getEingabe());
+
+        System.setIn(inDollar);
+        Assert.assertEquals("Dollar",Eingabe.getEingabe() );
+
+        System.setIn(inWert);
+        Assert.assertEquals("3.56", Eingabe.getEingabe());
     }
 
     @Test
     public void eingabeHasNext() {
+        String inputZwei = "2";
+        String inputEins = "1";
+        String inputNull = "0";
+        String inputDollar = "Dollar";
+        String inputWert = "3.56";
+
+        InputStream inZwei = new ByteArrayInputStream(inputZwei.getBytes());
+        InputStream inEins = new ByteArrayInputStream(inputEins.getBytes());
+        InputStream inNull = new ByteArrayInputStream(inputNull.getBytes());
+        InputStream inDollar = new ByteArrayInputStream(inputDollar.getBytes());
+        InputStream inWert = new ByteArrayInputStream(inputWert.getBytes());
+
+        System.setIn(inZwei);
+        Assert.assertTrue(Eingabe.EingabeHasNext());
+
+        System.setIn(inEins);
+        Assert.assertTrue(Eingabe.EingabeHasNext());
+
+        System.setIn(inNull);
+        Assert.assertTrue(Eingabe.EingabeHasNext());
+
+        System.setIn(inDollar);
+        Assert.assertTrue(Eingabe.EingabeHasNext());
+
+        System.setIn(inWert);
+        Assert.assertTrue(Eingabe.EingabeHasNext());
+
     }
 }
 
