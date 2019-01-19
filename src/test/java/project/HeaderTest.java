@@ -10,8 +10,8 @@ public class HeaderTest {
      */
     @Test
     public void headerOne() {
-        String EuroUSDollar = "\n\n\n\nCurrency to buy: Euro\nCurrency to sell: U.S. dollar\n++++++++++++++++++++++++++++++++++";
-        String MexicanPesoNepaleseRupee = "\n\n\n\nCurrency to buy: Mexican Peso\nCurrency to sell: Nepalese Rupee\n++++++++++++++++++++++++++++++++++";
+        String EuroUSDollar = "\n\n\n\ncurrency to buy: Euro\ncurrency to sell: U.S. dollar\n++++++++++++++++++++++++++++++++++";
+        String MexicanPesoNepaleseRupee = "\n\n\n\ncurrency to buy: Mexican Peso\ncurrency to sell: Nepalese Rupee\n++++++++++++++++++++++++++++++++++";
         Assert.assertEquals(EuroUSDollar, Header.headerOne("U.S. dollar", "Euro"));
         Assert.assertEquals(MexicanPesoNepaleseRupee, Header.headerOne("Nepalese Rupee", "Mexican Peso"));
     }

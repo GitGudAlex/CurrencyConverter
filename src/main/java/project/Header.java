@@ -13,7 +13,7 @@ public class Header {
      */
     public static String headerOne(String toSell, String toBuy) {
 
-        return "\n\n\n\nCurrency to buy: " + toBuy + "\nCurrency to sell: " + toSell +
+        return "\n\n\n\ncurrency to buy: " + toBuy + "\ncurrency to sell: " + toSell +
                 "\n++++++++++++++++++++++++++++++++++";
     }
 

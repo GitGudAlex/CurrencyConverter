@@ -6,7 +6,7 @@ public class Currency {
     private String rate;
 
     /**
-     * Konstruktor der Klasse Currency
+     * Konstruktor der Klasse currency
      * @param name
      * @param rate
      */
@@ -58,7 +58,7 @@ public class Currency {
         int counter=0;
 
         for(int i = 0; i<currency.length(); i++){
-            //Überprüfung ob übergebener Currency-Wert nicht aus Ziffern oder Punkt besteht
+            //Überprüfung ob übergebener currency-Wert nicht aus Ziffern oder Punkt besteht
             if(!currency.substring(i,i+1).equals("0")&&!currency.substring(i,i+1).equals("1")&&!currency.substring(i,i+1).equals("2")&&
                     !currency.substring(i,i+1).equals("3")&&!currency.substring(i,i+1).equals("4")&&!currency.substring(i,i+1).equals("5")&&
                     !currency.substring(i,i+1).equals("6")&&!currency.substring(i,i+1).equals("7")&&!currency.substring(i,i+1).equals("8")&&

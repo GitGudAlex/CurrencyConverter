@@ -3,16 +3,16 @@ package project;
 public class Selection {
 
 
-    public static String currencySelection(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
+    public static String currency(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
         String header = "";
         String[] sdrValue;
         boolean running = false;
         int counter = 0;
 
-        final String selectionStart = "0: Select currencySelection to buy: \n1: Select currencySelection to sell: \n2: Choose amount to be converted:";
+        final String selectionStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
         final String exitStart = "Please choose an option (>>x<< to exit)";
-        final String selection = "Enter a currencySelection´s name or part of it (>>xxx<< to exit):";
-        final String select = "Select a currencySelection by index:";
+        final String selection = "Enter a currency´s name or part of it (>>xxx<< to exit):";
+        final String select = "Select a currency by index:";
         String inputSelection;
         inputSelection = input;
 
@@ -29,7 +29,7 @@ public class Selection {
 
 
         while (!Helper.correctInput(input)) {
-            System.out.println("currencySelection does not exist. Please try again");
+            System.out.println("currency does not exist. Please try again");
             input = Input.getInput();
         }
 

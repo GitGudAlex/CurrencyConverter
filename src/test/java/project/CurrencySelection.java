@@ -30,6 +30,6 @@ public class CurrencySelection {
         InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
 
         System.setIn(inEuro);
-        Assert.assertEquals("Euro", Selection.currencySelection("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
+        Assert.assertEquals("Euro", Selection.currency("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
     }
 }

@@ -11,7 +11,7 @@ public class Main {
     public static int lengthArraySelection = 0;
 
     public static final String exitStart = "Please choose an option (>>x<< to exit)";
-    public static final String selectionStart = "0: Select currencySelection to buy: \n1: Select currencySelection to sell: \n2: Choose amount to be converted:";
+    public static final String selectionStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
     public static final String selection2 = "Enter an amount:";
 
     public static boolean selectedAmount = false; //gibt an ob Betrag (Selection 2) ausgewählt und gesetzt worden ist
@@ -44,18 +44,18 @@ public class Main {
 
                 switch (input) {
                     case "0":
-                        //currencySelection wird für to buy ausgewählt
-                        toBuy = Selection.currencySelection(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
+                        //currency wird für to buy ausgewählt
+                        toBuy = Selection.currency(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "1":
-                        //currencySelection wird für to sell ausgewählt
-                        toSell = Selection.currencySelection(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
+                        //currency wird für to sell ausgewählt
+                        toSell = Selection.currency(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "2":
                         if (toBuy.equals("not set") || toSell.equals("not set")) {
-                            System.out.println("Please select a currencySelection");
+                            System.out.println("Please select a currency");
                         } else {
                             System.out.println(selection2);
                             input = Input.getInput();
@@ -80,7 +80,7 @@ public class Main {
                         break;
 
                     default:
-                        System.out.println("invalid Input. Please select a currencySelection.");
+                        System.out.println("invalid Input. Please select a currency.");
                         selected = false;
                         break;
                 }
@@ -90,7 +90,7 @@ public class Main {
         }
 
     /**
-     * Füllt die currencySelection-Liste
+     * Füllt die currency-Liste
      */
     public static void fillCurrencyList(){
         String cache;
@@ -109,15 +109,15 @@ public class Main {
             //wird ausgeführt, solange der Scanner in der Datei noch Inhalt findet
             while (s.hasNext()) {
                 cache = s.nextLine();
-                //Name der Currency wird in [0] und SDR-Wert in [1] gespeichert
+                //Name der currency wird in [0] und SDR-Wert in [1] gespeichert
                 String[] p = cache.split(":");
-                //Überprüfung ob Currency "korrekten" SDR-Wert hat
+                //Überprüfung ob currency "korrekten" SDR-Wert hat
                 correctNumber = Currency.correctSDRValue(p[1]);
-                //wird ausgeführt, falls Currency "korrekten" SDR-Wert hat
+                //wird ausgeführt, falls currency "korrekten" SDR-Wert hat
                 if (correctNumber) {
-                    //neues Currency-Objekt wird erstellt
+                    //neues currency-Objekt wird erstellt
                     Currency neuesObjekt = new Currency(p[0], p[1]);
-                    //Objekt wird Currency-Liste hinzugefügt
+                    //Objekt wird currency-Liste hinzugefügt
                     currencylist.add(listNumber, neuesObjekt);
                     listNumber++;
                 }

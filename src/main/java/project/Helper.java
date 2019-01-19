@@ -36,21 +36,21 @@ public class Helper {
     public static String[] sdrValue(String toSell, String toBuy) {
         //String array wird deklariert
         String[] value = new String[2];
-        //wird ausgeführt, solange i kleiner ist als Länge der Currency-Liste
+        //wird ausgeführt, solange i kleiner ist als Länge der currency-Liste
         for (int i = 0; i < Main.currencylist.size(); i++) {
             String cache = Main.currencylist.get(i).getName();
-            //falls Name der Currency, der ausgewählten toSell-Currency entspricht
+            //falls Name der currency, der ausgewählten toSell-currency entspricht
             if (cache.contains(toSell)) {
                 //zugehöriger SDR-Wert wird gespeichert
                 value[0] = Main.currencylist.get(i).getRate();
             }
-            //falls Name der Currency, der ausgewählten toBuy-Currency entspricht
+            //falls Name der currency, der ausgewählten toBuy-currency entspricht
             if (cache.contains(toBuy)) {
                 //zugehöriger SDR-Wert wird gespeichert
                 value[1] = Main.currencylist.get(i).getRate();
             }
         }
-        //SDR-Wert von toBuy- und toSell-Currency wird zurückgegeben
+        //SDR-Wert von toBuy- und toSell-currency wird zurückgegeben
         return value;
     }
 
