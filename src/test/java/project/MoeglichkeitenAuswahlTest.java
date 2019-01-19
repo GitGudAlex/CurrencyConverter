@@ -12,7 +12,7 @@ public class MoeglichkeitenAuswahlTest {
     }
 
     /**
-     * UnitTest der Methode MöglichkeitenAuswahl(), die bei einer Eingabe von einem vollständigen Wort oder nur einem
+     * UnitTest der Methode MöglichkeitenAuswahl(), die bei einer input von einem vollständigen Wort oder nur einem
      * Teilwort eine Liste der möglichen Währungen ausgibt.
      * Testen, ob die ausgegebenen Vorschläge für z.B. dol, Eu oder euro richtig sind.
      * Testen, ob Groß- und Kleinschriebung, sowie das ganze Wort bzw. ein Teil des Wortes zum gleichen Ergebnis führen.
@@ -42,12 +42,12 @@ public class MoeglichkeitenAuswahlTest {
         suggestionNew [0] = "Israeli New Shekel";
         suggestionNew [1] = "New Zealand dollar";
 
-        Assert.assertArrayEquals(suggestionDol, Auswahl.MöglichkeitenAuswahl("dol"));
-        Assert.assertArrayEquals(suggestionEuro, Auswahl.MöglichkeitenAuswahl("Eu"));
-        Assert.assertArrayEquals(suggestionEuro, Auswahl.MöglichkeitenAuswahl("eur"));
-        Assert.assertArrayEquals(suggestionEuro, Auswahl.MöglichkeitenAuswahl("Euro"));
-        Assert.assertArrayEquals(suggestionAu, Auswahl.MöglichkeitenAuswahl("au"));
-        Assert.assertArrayEquals(suggestionAu, Auswahl.MöglichkeitenAuswahl("Au"));
-        Assert.assertArrayEquals(suggestionNew, Auswahl.MöglichkeitenAuswahl("new"));
+        Assert.assertArrayEquals(suggestionDol, Selection.MöglichkeitenAuswahl("dol"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("Eu"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("eur"));
+        Assert.assertArrayEquals(suggestionEuro, Selection.MöglichkeitenAuswahl("Euro"));
+        Assert.assertArrayEquals(suggestionAu, Selection.MöglichkeitenAuswahl("au"));
+        Assert.assertArrayEquals(suggestionAu, Selection.MöglichkeitenAuswahl("Au"));
+        Assert.assertArrayEquals(suggestionNew, Selection.MöglichkeitenAuswahl("new"));
     }
 }

@@ -17,8 +17,8 @@ public class HelperTest {
     }
 
     /**
-     * UnitTest der Methode EingabeKorrekt(), welche überprüft, ob es sich bei der Auswahl der Währung um eine korrekte
-     * Eingabe handelt (d.h. eine vorhandene Währung)
+     * UnitTest der Methode EingabeKorrekt(), welche überprüft, ob es sich bei der Selection der Währung um eine korrekte
+     * input handelt (d.h. eine vorhandene Währung)
      */
     @Test
     public void eingabeKorrekt() {

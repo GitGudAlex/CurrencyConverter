@@ -1,6 +1,6 @@
 package project;
 
-public class KopfBereich {
+public class Header {
 
 
     /**

@@ -9,7 +9,7 @@ public class Helper {
      */
     public static boolean EingabeKorrekt(String input) {
         boolean test = true;
-        //falls "xxx" eingegeben wurde, ist Eingabe korrekt
+        //falls "xxx" eingegeben wurde, ist input korrekt
         if (input.equals("xxx")){
             //gebe true zurück
             return true;

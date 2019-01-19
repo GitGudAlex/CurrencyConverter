@@ -14,8 +14,8 @@ public class Main {
     public static final String selectionStart = "0: Select currency to buy: \n1: Select currency to sell: \n2: Choose amount to be converted:";
     public static final String selection2 = "Enter an amount:";
 
-    public static boolean selectedAmount = false; //gibt an ob Betrag (Auswahl 2) ausgewählt und gesetzt worden ist
-    public static boolean selected = false; //gibt an ob eine Auswahl ausgewählt wurde
+    public static boolean selectedAmount = false; //gibt an ob Betrag (Selection 2) ausgewählt und gesetzt worden ist
+    public static boolean selected = false; //gibt an ob eine Selection ausgewählt wurde
     public static boolean correctNumber;
 
 
@@ -35,22 +35,22 @@ public class Main {
         //ArrayList currencylist wird mit Daten aus anderer Datei gefüllt
         currencyListeFüllen();
 
-        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy) + "\n" + selectionStart + "\n\n\n" + exitStart);
+        System.out.println(Header.KopfbereichEins(toSell, toBuy) + "\n" + selectionStart + "\n\n\n" + exitStart);
 
 
         while (running || !selected) {
-            input = Eingabe.getEingabe();
+            input = project.input.getEingabe();
             selected = true;
 
                 switch (input) {
                     case "0":
                         //currency wird für to buy ausgewählt
-                        toBuy = Auswahl.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
+                        toBuy = Selection.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "1":
                         //currency wird für to sell ausgewählt
-                        toSell = Auswahl.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
+                        toSell = Selection.Laenderauswahl(toSell, toBuy, selectedAmount, enteredAmount, convertedAmount, input);
                         break;
 
                     case "2":
@@ -58,7 +58,7 @@ public class Main {
                             System.out.println("Please select a currency");
                         } else {
                             System.out.println(selection2);
-                            input = Eingabe.getEingabe();
+                            input = project.input.getEingabe();
 
                             do {
                                 selectedAmount = true;
@@ -67,7 +67,7 @@ public class Main {
                                 if (enteredAmount < 0) {
                                     selectedAmount = false;
                                     System.out.println("please enter a positiv amount");
-                                    input = Eingabe.getEingabe();
+                                    input = project.input.getEingabe();
                                 }
                             } while (selectedAmount == false);
 

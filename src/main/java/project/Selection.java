@@ -1,6 +1,6 @@
 package project;
 
-public class Auswahl {
+public class Selection {
 
 
     public static String Laenderauswahl(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
@@ -17,20 +17,20 @@ public class Auswahl {
         inputSelection = input;
 
         if (!selectedAmount) {
-            header = KopfBereich.KopfbereichEins(toSell, toBuy);
+            header = Header.KopfbereichEins(toSell, toBuy);
 
         } else if (selectedAmount) {
-            header = KopfBereich.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount);
+            header = Header.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount);
         }
 
         System.out.println(header + "\n" + selectionStart + "\n\n" + exitStart + "\n" + selection);
 
-        input = Eingabe.getEingabe();
+        input = project.input.getEingabe();
 
 
         while (!Helper.EingabeKorrekt(input)) {
             System.out.println("currency does not exist. Please try again");
-            input = Eingabe.getEingabe();
+            input = project.input.getEingabe();
         }
 
         if (!input.equals("xxx")) {
@@ -47,7 +47,7 @@ public class Auswahl {
 
                 System.out.println("\n" + select);
 
-                input = Eingabe.getEingabe();
+                input = project.input.getEingabe();
 
             } else {
                 suggestion[0] = MöglichkeitenAuswahl(input)[0];
@@ -74,7 +74,7 @@ public class Auswahl {
 
                 try {
                     if (!selectedAmount&&running) {
-                        System.out.println(KopfBereich.KopfbereichEins(toSell, toBuy));
+                        System.out.println(Header.KopfbereichEins(toSell, toBuy));
 
                     } else if (selectedAmount) {
 
@@ -82,16 +82,16 @@ public class Auswahl {
 
                         convertedAmount = Rechner.Umrechner(sdrValue, enteredAmount);
 
-                        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount));
+                        System.out.println(Header.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount));
                         running=true;
                     }else if(!running){
-                        input=Eingabe.getEingabe();
+                        input= project.input.getEingabe();
                     }
 
                 }catch (NullPointerException e) {
                     running = false;
                     System.out.println("ashdbasajsfasfasföa");
-                    input = Eingabe.getEingabe();
+                    input = project.input.getEingabe();
 
                 }
                 }
@@ -106,11 +106,11 @@ public class Auswahl {
 
 
     /**
-     * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der Eingabe des Benutzers
+     * Methode MöglichkeitenAuswahl: Auslesen der Arrayliste, welche Währungen mit der input des Benutzers
      * teilweise oder ganz übereinstimmen.
      *
      * @param input übergibt die Benutzereingabe
-     * @return Array vorschlag, der die Auswahl der Länder enthält
+     * @return Array vorschlag, der die Selection der Länder enthält
      */
     public static String[] MöglichkeitenAuswahl(String input) {
 

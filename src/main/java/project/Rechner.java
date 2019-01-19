@@ -55,7 +55,7 @@ public class Rechner {
     }
 
     /**
-     * Methode zur Ausführung von Auswahl 2
+     * Methode zur Ausführung von Selection 2
      *
      * @param toSell
      * @param toBuy
@@ -68,7 +68,7 @@ public class Rechner {
         //SDR-Wert für toSell wird ausgerechnet
         double convertedAmount = Rechner.Umrechner(sdrWert, enteredAmount);
         //Kopfbereich wird gebildet und wird zusammen mit Rest ausgegeben
-        System.out.println(KopfBereich.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount) + "\n" + Main.selectionStart + "\n\n" + Main.exitStart);
+        System.out.println(Header.KopfbereichZwei(toSell, toBuy, enteredAmount, convertedAmount) + "\n" + Main.selectionStart + "\n\n" + Main.exitStart);
         //umgerechneterBetrag wird zurückgegeben
         return convertedAmount;
     }
@@ -102,7 +102,7 @@ public class Rechner {
                 //Wenn eingabe nicht in double-Wert gespeichert werden kann, da eingabe keine Zahl
                 System.out.println("Please enter a value.");
                 //erneute eingabe; While-Schleife wird wiederholt
-                input = Eingabe.getEingabe();
+                input = project.input.getEingabe();
             }
         }
         return inputDouble;
