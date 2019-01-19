@@ -3,12 +3,12 @@ package project;
 public class Helper {
 
     /**
-     * Methode Rechner: rechnet den von Benutzer eingegebenen Geldbetrag, mithilfe des
-     * SDR Wertes in die gewünschte Währung um.
+     * rechnet den vom Benutzer eingegebenen Geldbetrag mithilfe des
+     * SDR Wertes in gewünschte Währung um.
      * Dazu wird der vom Benutzer eingegebene Wert, sowie die SDR-Werte von der
      * toBuy-Währung und der toSell-Währung übergeben.
      *
-     * @param value       SDR-Werte der Währungen
+     * @param value SDR-Werte der Währungen
      * @param amount vom Benutzer eingegebener Betrag zum umrechnen
      * @return umgerechneterBetrag
      */
@@ -28,10 +28,10 @@ public class Helper {
     }
 
     /**
-     * Methode sdrValue: Methode zur Auslesen des SDR-Wertes für die jeweilige Währung des Landes
+     * Methode zur Auslesen des SDR-Wertes für die jeweilige Währung des Landes
      * @param toSell Währung des Landes
      * @param toBuy  Währung des Landes
-     * @return wert SDR-Werte der jeweiligen Währung von toSell und toBuy
+     * @return wert SDR-Werte der jeweiligen Währung von toSell([0]) und toBuy([1])
      */
     public static String[] sdrValue(String toSell, String toBuy) {
         //String array wird deklariert
@@ -57,9 +57,9 @@ public class Helper {
     /**
      * Methode zur Ausführung von Selection 2
      *
-     * @param toSell
-     * @param toBuy
-     * @param enteredAmount
+     * @param toSell Währung von toSell
+     * @param toBuy Währung von toBuy
+     * @param enteredAmount eingegebener Betrag
      * @return umgerechneterBetrag
      */
     public static double selectionTwo(String toSell, String toBuy, double enteredAmount) {
@@ -74,11 +74,11 @@ public class Helper {
     }
 
     /**
-     * Methode die überprüft ob Punkt oder Komma eingegeben wurde. Falls komma eingegeben wurde wir dies
+     * Methode die überprüft ob Punkt oder Komma eingegeben wurde. Falls Komma eingegeben wurde wir dies
      * in einen Punkt umgewandelt
      *
-     * @param input
-     * @return eingabeDouble
+     * @param input übergebene Eingabe
+     * @return Eingabe als Double
      */
     public static double replace(String input) {
         //Deklaration Boolean-Variable
@@ -109,8 +109,8 @@ public class Helper {
     }
 
     /**
-     * Methode die überprüft, ob es sich um eine korrekte Eingabe handelt,
-     * d.h. eine vorhandene Währung oder "xxx" zum Abbruch
+     * Methode die überprüft, ob es sich um eine korrekte Eingabe handelt
+     * (vorhandene Währung oder "xxx" zum Abbruch)
      * @param input Eingabe des Benutzers
      * @return Boolean Eingabe korrekt (true)/ Eingabe falsch (false)
      */

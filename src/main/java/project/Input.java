@@ -4,9 +4,13 @@ import java.util.Scanner;
 
 public class Input {
 
-    // Methode zum Scannen der Benutzereingabe
+    /**
+     *Scannen der Benutzereingabe
+      */
     public static String getInput(){
-        Scanner inputScanner = new Scanner(System.in); //Initialisierung Scanner
-        return inputScanner.next(); //nächste Eingabe scannen
+        //Initialisierung Scanner
+        Scanner inputScanner = new Scanner(System.in);
+        //nächste Eingabe scannen
+        return inputScanner.next();
     }
 }

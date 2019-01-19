@@ -4,12 +4,12 @@ public class Header {
 
 
     /**
-     * Methode headerOne: Methode zur Ausgabe des Kopfbereich, solange noch kein Betrag
+     * Methode zur Ausgabe des Kopfbereich, solange noch kein Betrag
      * zum Umrechnen eingegeben wurde.
      *
      * @param toSell Währung des Landes
      * @param toBuy  Währung des Landes
-     * @returnAusgabe des Kopfbereichs
+     * @return Ausgabe des Kopfbereichs
      */
     public static String headerOne(String toSell, String toBuy) {
 
@@ -18,13 +18,13 @@ public class Header {
     }
 
     /**
-     * Methode headerTwo: Methode zur Ausgabe des Kopfbereich, nachdem bereits ein Betrag
+     * Methode zur Ausgabe des Kopfbereich, nachdem bereits ein Betrag
      * zum Umrechnen eingegeben wurde.
      *
-     * @param toSell             Währung des Landes
-     * @param toBuy              Währung des Landes
+     * @param toSell Währung des Landes
+     * @param toBuy Währung des Landes
      * @param toconvertedValue eingegebener Wert des Benutzers, der umgerechnet werden soll
-     * @param convertedValue
+     * @param convertedValue umgerechneter Wert
      * @return Ausgabe des Kopfbereichs
      */
     public static String headerTwo(String toSell, String toBuy, double toconvertedValue, double convertedValue) {

@@ -2,7 +2,17 @@ package project;
 
 public class Selection {
 
-
+    /**
+     * Auswahl der Währungen wird ausgegeben und weitere Eingabe zur Eingabe für Währung gespeichert und in toBuy/toSell abgespeichert.
+     * Außerdem wird, wenn 2 zum zweiten Mal ausgewählt, Betrag neu berechnet.
+     * @param toSell bisheriger Wert von toSell
+     * @param toBuy bisheriger Wert von toBuy
+     * @param selectedAmount gibt an ob Betrag (Selection 2) ausgewählt und gesetzt worden ist
+     * @param enteredAmount eingegebener Umrechnungswert
+     * @param convertedAmount umgerechneter Wert
+     * @param input übergibt Eingabe (0, 1, oder 2). Wird in inputSelection gespeichert
+     * @return Wert für toBuy/toSell, je nachdem, welche Option (1 oder 2) gewählt worden ist
+     */
     public static String currency(String toSell, String toBuy, boolean selectedAmount, double enteredAmount, double convertedAmount, String input) {
         //Variablendeklaration
         String header = "";
@@ -61,46 +71,59 @@ public class Selection {
             }
 
             while (!running) {
-                running=true;
-                //Wenn am Anfang die Option "0" ausgewählt wurde, wird die Währung in toBuy geschrieben
-                if (inputSelection.equals("0")) {
-                    toBuy = selected(input, suggestion, inputSelection, toSell, toBuy);
-                //Wenn am Anfang die Option "1" ausgewählt wurde, wir die Währung in toSell geschrieben
-                } else if (inputSelection.equals("1")) {
-                    toSell = selected(input, suggestion, inputSelection, toSell, toBuy);
-                }
-
-                try{ //Falls bei der Auswahl der Währung eine größere oder kleinere Zahl eingegeben wird, Wiederholung while-Schleife
-                    int inputInt = Integer.valueOf(input);
-                    if (inputInt > counter || inputInt < 0) {
-                        running = false;
+                    running=true;
+                    //Wenn am Anfang die Option "0" ausgewählt wurde, wird die Währung in toBuy geschrieben
+                    if (inputSelection.equals("0")) {
+                        toBuy = selected(input, suggestion, inputSelection, toSell, toBuy);
+                    //Wenn am Anfang die Option "1" ausgewählt wurde, wir die Währung in toSell geschrieben
+                    } else if (inputSelection.equals("1")) {
+                        toSell = selected(input, suggestion, inputSelection, toSell, toBuy);
+                    }
+                    //Wenn xxx eingegeben, while-Schleife abbrechen
+                    if(input.equals("xxx")) break;
+                    try{
+                        int inputInt = Integer.valueOf(input);
+                        //Falls eingegebene Zahl kleiner als null oder größer als Auswahl. Warnung wird geschrieben und while-Schleife wiederholt
+                        if (inputInt > counter || inputInt < 0) {
+                            running = false;
+                            System.out.println("Please enter a valid number.");
+                        }
+                    //Falls Buchstaben eingegeben werden, wird der Fehler abgefangen und die while-Schleife wiederholt
+                    }catch (NumberFormatException e){
                         System.out.println("Please enter a valid number.");
-                    }
-                }catch (NumberFormatException e){//Falls Buchstaben eingegeben werden, wird der Fehler abgefangen und die while-Schleife wiederholt
-                    System.out.println("Please enter a valid number.");
-                    running = false;
-                }
-
-                try {// Wenn kein Betrag ausgewählt wurde und die Währung in toBuy/toSell geschrieben wurde, wird der "header" ausgegeben
-                    if (!selectedAmount&&running) {
-                        System.out.println(Header.headerOne(toSell, toBuy));
-
-                    } else if (selectedAmount) {//Wenn ein Betrag ausgewählt wurde
-
-                        sdrValue = Helper.sdrValue(toSell, toBuy); //Aufrufen der Methode die SDRWerte der Währungen zurückgibt
-
-                        convertedAmount = Helper.converter(sdrValue, enteredAmount);//Aufrufen der Methode, die den eingegebenen Betrag umrechnet und zurückgibt
-
-                        System.out.println(Header.headerTwo(toSell, toBuy, enteredAmount, convertedAmount));//Ausgabe "header"
-                        running=true;
-                    }else if(!running){//Wenn bei der Auswahl der Währung eine zu große oder zu kleine Zahl eingegeben wurde, erneut scannen der Benutzereingabe
-                        input= Input.getInput();
+                        running = false;
                     }
 
-                }catch (NullPointerException e) { //Abfangen der Fehlermeldung, wenn bei der Auswahl der Währungen eine falsche Eingabe stattfindet und toBuy/toSell ungleich "not set" sind
-                    running = false;
-                    input = Input.getInput(); //Scannen der Benutzereingabe
-                }
+                    try {
+                        // Wenn kein Betrag ausgewählt wurde und Auswahl der Währung korrekt war, wird der "header1" ausgegeben
+                        if (!selectedAmount&&running) {
+                            System.out.println(Header.headerOne(toSell, toBuy));
+
+                        } else if (selectedAmount) {//Wenn ein Betrag ausgewählt wurde
+                            //Aufrufen der Methode die SDRWerte der Währungen zurückgibt
+                            sdrValue = Helper.sdrValue(toSell, toBuy);
+                            //Aufrufen der Methode, die den eingegebenen Betrag umrechnet und zurückgibt
+                            convertedAmount = Helper.converter(sdrValue, enteredAmount);
+                            //Ausgabe "header2"
+                            System.out.println(Header.headerTwo(toSell, toBuy, enteredAmount, convertedAmount));
+                            running=true;
+                        }else if(!running){//Wenn bei der Auswahl der Währung falsche/keine Zahl eingegeben wurde, erneut scannen der Benutzereingabe
+                            input= Input.getInput();
+                        }
+
+                    }catch (NullPointerException e) { //Abfangen der Fehlermeldung, wenn bei der Auswahl der Währungen eine falsche Eingabe stattfindet und toBuy/toSell ungleich "not set" sind
+                        running = false;
+                        //Scannen der Benutzereingabe
+                        input = Input.getInput();
+                    }
+            }
+        }
+
+        if(input.equals("xxx")){
+            if(!selectedAmount){
+                System.out.println(Header.headerOne(toSell, toBuy));
+            }else{
+                System.out.println(Header.headerTwo(toSell,toBuy,enteredAmount,convertedAmount));
             }
         }
             System.out.println(selectionStart + "\n\n" + exitStart);
@@ -129,13 +152,15 @@ public class Selection {
             //Auslesen der Währungen aus der Currencyliste, abspeichern im "cache"
             String cache = Main.currencylist.get(i).getName();
             String output = cache;
-            if (cache.toLowerCase().contains(input.toLowerCase())) { // Überprüfen ob "cache" in Eingabe enthalten ist, wenn ja abspeichern in Array "suggestion"
+            // Überprüfen ob "cache" in Eingabe enthalten ist, wenn ja, abspeichern in Array "suggestion"
+            if (cache.toLowerCase().contains(input.toLowerCase())) {
                 suggestion[counter] = output;
                 counter++;
             }
         }
         Main.lengthArraySelection = counter;
-        return suggestion; //Rückgabe der Vorschläge der möglichen Währungen
+        //Rückgabe der Vorschläge der möglichen Währungen
+        return suggestion;
     }
 
     public static String selected(String input, String [] suggestion, String inputSelection, String toSell, String toBuy){
