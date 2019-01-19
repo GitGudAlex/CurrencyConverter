@@ -33,7 +33,7 @@ public class Currency {
 
     /**
      * setzt die Variable name für das Objekt
-     * @param name
+     * @param name Name der Währung
      * @return
      */
     public String setName(String name){
@@ -42,7 +42,7 @@ public class Currency {
 
     /**
      * setzt die Variable rate für das Objekt
-     * @param rate
+     * @param rate SDR-Wert der Währung
      * @return
      */
     public String setRate(String rate) {
@@ -51,7 +51,7 @@ public class Currency {
 
     /**
      * Mathode zur Überprüfung ob die aus der Datei übergegebenen Werte echte Zahlen sind.
-     * @param currency
+     * @param currency Wert der Währung
      * @return boolean true: Werte sind echte Zahlen; false: Wert sind keine Zahlen
      */
     public static boolean correctSDRValue(String currency){
