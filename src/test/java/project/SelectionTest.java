@@ -19,21 +19,7 @@ public class SelectionTest {
         Main.fillCurrencyList();
     }
 
-    /**
-     * UnitTest der Methode Länderauswahl(), die bei der Selection der Option 0 oder 1 aufgerufen wird um eine
-     * Währung für toBuy oder toSell festzulegen.
-     * Der Test findet mit einer vorausgesetzen Scannereingabe statt.
-     */
-    @Test
-     public void currencySelection() {
 
-        String inputEuro = "euro";
-
-        InputStream inEuro = new ByteArrayInputStream(inputEuro.getBytes());
-
-        System.setIn(inEuro);
-        Assert.assertEquals("Euro", Selection.currencySelection("Australian dollar", "U.S. dollar", true, 3.0,3.96, "0" ));
-   }
 
     /**
      * UnitTest der Methode Ausgewählt(), bei der die Selection einer Währung aus der ausgegebenen Liste
