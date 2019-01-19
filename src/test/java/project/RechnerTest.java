@@ -7,13 +7,18 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RechnerTest {
+
+    /**
+     * Aufruf Methode currencyListeFüllen(): Die Daten (Währungen und SDR Werte),
+     * werden aus der Datei ausgelesen und in eine ArrayListe geschrieben.
+     */
     @Before
     public void initialisieren (){
         Main.currencyListeFüllen();
     }
 
     /**
-     * Unit Test: Methode Umrechner
+     * UnitTest der Methode Umrechner(), die überprüft ob der richtige Wert berechnet wird beim aufrufen der Methode
      */
     @Test
     public void umrechner() {
@@ -34,6 +39,10 @@ public class RechnerTest {
 
     }
 
+    /**
+     * UniTest der Methode SDRWert: zur Überprüfung, ob der richtige SDRWert aus der Currencyliste ausgelesen wird
+     * beim übergeben der Währung
+     */
     @Test
     public void SDRWert() {
         Assert.assertArrayEquals(new String[]{"1.349170", "1.273760"}, Rechner.SDRWert("U.S. dollar", "Euro"));
@@ -43,6 +52,10 @@ public class RechnerTest {
         Assert.assertArrayEquals(new String[]{"1.349170", "14.024600"}, Rechner.SDRWert("U.S. dollar", "Botswana pula"));
     }
 
+    /**
+     * UnitTest der Methode blockZwei(), zur Überprüfung, ob bei der Übergabe der Währungen der eingegebene Wert
+     * richtig umgerechnet wird.
+     */
     @Test
     public void blockZwei() {
         Assert.assertEquals(5.3 , Rechner.BlockZwei("U.S. dollar", "Euro", 5.0), 1e-15);
@@ -52,6 +65,10 @@ public class RechnerTest {
         Assert.assertEquals(19.49 , Rechner.BlockZwei("Malaysian ringgit", "Australian dollar", 5.78), 1e-15);
     }
 
+    /**
+     * UniTest ob bei der Methode PunktKomma(), Werte, die mit "," geschrieben sind ein Werte, die mit "." getrennt
+     * sind umgeschrieben werden.
+     */
     @Test
     public void punktKomma() {
         Assert.assertEquals(3.4, Rechner.PunktKomma("3.4"), 1e-15);

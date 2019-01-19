@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 
 public class KopfBereichTest {
 
+    /**
+     * UnitTest der Methode kopfbereichEins(), die den Kopfbereich mit den übergebenen Parametern ausgibt.
+     */
     @Test
     public void kopfbereichEins() {
         String EuroUSDollar = "\n\n\n\nCurrency to buy: Euro\nCurrency to sell: U.S. dollar\n++++++++++++++++++++++++++++++++++";
@@ -15,6 +18,9 @@ public class KopfBereichTest {
         Assert.assertEquals(MexicanPesoNepaleseRupee, KopfBereich.KopfbereichEins("Nepalese Rupee", "Mexican Peso"));
     }
 
+    /**
+     * UnitTest der Methode kopfbereichZwei(), die den Kopfbereich mit den übergebenen Parametern ausgibt.
+     */
     @Test
     public void kopfbereichZwei() {
         String EuroUSDollar = "\n\n\n\nBuying: 3.5 Euro\nSelling: 3.71 U.S. dollar\n++++++++++++++++++++++++++++++++++";

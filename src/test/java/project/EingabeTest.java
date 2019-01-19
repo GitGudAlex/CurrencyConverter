@@ -10,6 +10,10 @@ import java.io.InputStream;
 
 public class EingabeTest {
 
+    /**
+     * UnitTest der Methode getEingabe(), die die nächste Eingabe des Benutzers zurückgibt.
+     * Test findet mit festgelegter Benutzereingabe statt.
+     */
     @Test
     public void getEingabe(){
         String inputZwei = "2";
@@ -40,6 +44,10 @@ public class EingabeTest {
         Assert.assertEquals("3.56", Eingabe.getEingabe());
     }
 
+    /**
+     * UnitTest der Methode EingabeHasNext(), die überprüft, ob eine Eingabe des Benutzers vorhanden ist.
+     * Test findet mit festgelegter Benutzereingabe statt.
+     */
     @Test
     public void eingabeHasNext() {
         String inputZwei = "2";
