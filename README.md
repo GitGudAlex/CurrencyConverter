@@ -72,17 +72,7 @@ java CurrencyConverter currencies.txt
 
 ## 👥 Autor:innen
 
-Bonusprojekt im SS 2017 – Modul Software Development 1:
+Mascha Weis
+Susanne Weiß
+Alexander Kraus
 
-- Studierende der HDM Stuttgart
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt ist für Bildungszwecke und Übungszwecke implementiert.  
-Für Informationen zur Wiederverwendung kontaktiere die Autor:innen.
-
----
-
-🎉 Viel Erfolg beim Erkunden der Währungsumrechnung über SDR!
